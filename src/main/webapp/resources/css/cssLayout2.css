@@ -1,0 +1,120 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/10/2017, 21:47:28
+    Author     : Matheus Levi
+*/
+
+body
+{
+    background-color: #eee;
+}
+
+#content
+{
+    display: block;
+    margin-right: -10px;
+    padding: : 100%;
+    height: 500px;
+}
+
+#top {
+    position: relative;
+    background-color: #fff;
+    //border: solid 1pt black;
+    color: white;
+    padding: 0px;
+    height: 95px;
+    margin: -10px -10px 10px -10px;
+}
+
+#logo
+{
+    height:90px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+#slogan
+{
+   font-family: Arial;
+   color: blue;
+   font-size: 20pt;
+   top: 20%;
+   position: absolute;
+}
+
+#bottom {
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+    color: #000;
+    padding: 5px;
+    margin: 10px -10px 0px -10px;
+}
+
+#left {
+    float: left;
+    background-color: #fff;
+    padding: 5px;
+    width: 200px;
+    margin: 0px 10px 20px -10px;
+    height: 600px;
+    clear: right;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    //background-color: #dddddd;
+    padding: 5px;
+}
+
+.left_content {
+    //background-color: #dddddd;
+    padding: 5px;
+    margin-left: 205px;
+}
+
+.right_content {
+    //background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+.customTitleBar > .ui-panel-titlebar {
+    background: #BBBBBB;
+    margin: 0px;
+    font-weight: bold;
+    text-align: center;
+    font-family: Arial ;
+    }
+
+    
+
+
+
+
+
