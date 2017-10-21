@@ -7,13 +7,12 @@ body
 {
     display: block;
     margin-right: -10px;
-    padding: : 100%;
+    //padding: 100%;
 }
 
 #top {
     position: relative;
     background-color: #fff;
-    //border: solid 1pt black;
     color: white;
     padding: 0px;
     height: 105px;
@@ -39,7 +38,7 @@ body
     float: left;
     background-color: #fff;
     padding: 5px;
-    width: 200px;
+    width: 250px;
     margin: 0px 10px 20px -10px;
     height: 600px;
     clear: right;
@@ -61,7 +60,7 @@ body
 .left_content {
     background-color: #dddddd;
     padding: 5px;
-    margin-left: 205px;
+    margin-left: 260px;
 }
 
 .right_content {
