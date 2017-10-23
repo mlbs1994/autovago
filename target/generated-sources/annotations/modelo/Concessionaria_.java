@@ -8,7 +8,7 @@ import modelo.AdmConcessionaria;
 import modelo.Endereco;
 import modelo.Oferta;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-23T17:10:18")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-23T18:05:05")
 @StaticMetamodel(Concessionaria.class)
 public class Concessionaria_ { 
 

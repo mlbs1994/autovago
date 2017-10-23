@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,12 +34,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "concessionaria", catalog = "autovago", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Concessionaria.findAll", query = "SELECT c FROM Concessionaria c"),
-    @NamedQuery(name = "Concessionaria.findByIdConcessionaria", query = "SELECT c FROM Concessionaria c WHERE c.idConcessionaria = :idConcessionaria"),
-    @NamedQuery(name = "Concessionaria.findByNome", query = "SELECT c FROM Concessionaria c WHERE c.nome = :nome"),
-    @NamedQuery(name = "Concessionaria.findBySite", query = "SELECT c FROM Concessionaria c WHERE c.site = :site"),
+    @NamedQuery(name = "Concessionaria.findAll", query = "SELECT c FROM Concessionaria c")
+    ,
+    @NamedQuery(name = "Concessionaria.findByIdConcessionaria", query = "SELECT c FROM Concessionaria c WHERE c.idConcessionaria = :idConcessionaria")
+    ,
+    @NamedQuery(name = "Concessionaria.findByNome", query = "SELECT c FROM Concessionaria c WHERE c.nome = :nome")
+    ,
+    @NamedQuery(name = "Concessionaria.findBySite", query = "SELECT c FROM Concessionaria c WHERE c.site = :site")
+    ,
     @NamedQuery(name = "Concessionaria.findByCnpj", query = "SELECT c FROM Concessionaria c WHERE c.cnpj = :cnpj")})
 public class Concessionaria implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,10 +67,10 @@ public class Concessionaria implements Serializable {
     @Column(name = "cnpj")
     private String cnpj;
     @JoinColumn(name = "idAdmConcessionaria", referencedColumnName = "idAdmConcessionaria")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private AdmConcessionaria idAdmConcessionaria;
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private Endereco idEndereco;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcessionaria")
     private List<Oferta> ofertaList;
@@ -164,5 +170,5 @@ public class Concessionaria implements Serializable {
     public String toString() {
         return "modelo.Concessionaria[ idConcessionaria=" + idConcessionaria + " ]";
     }
-    
+
 }

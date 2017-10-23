@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -40,10 +41,11 @@ public class AdmConcessionaria implements Serializable {
     @Basic(optional = false)
     @Column(name = "idAdmConcessionaria")
     private Integer idAdmConcessionaria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAdmConcessionaria")
-    private List<Concessionaria> concessionariaList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idAdmConcessionaria")
+    @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
+    private Concessionaria idConcessionaria;
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private Usuario idUsuario;
 
     public AdmConcessionaria() {
@@ -61,14 +63,6 @@ public class AdmConcessionaria implements Serializable {
         this.idAdmConcessionaria = idAdmConcessionaria;
     }
 
-    @XmlTransient
-    public List<Concessionaria> getConcessionariaList() {
-        return concessionariaList;
-    }
-
-    public void setConcessionariaList(List<Concessionaria> concessionariaList) {
-        this.concessionariaList = concessionariaList;
-    }
 
     public Usuario getIdUsuario() {
         return idUsuario;
@@ -101,6 +95,20 @@ public class AdmConcessionaria implements Serializable {
     @Override
     public String toString() {
         return "modelo.AdmConcessionaria[ idAdmConcessionaria=" + idAdmConcessionaria + " ]";
+    }
+
+    /**
+     * @return the idConcessionaria
+     */
+    public Concessionaria getIdConcessionaria() {
+        return idConcessionaria;
+    }
+
+    /**
+     * @param idConcessionaria the idConcessionaria to set
+     */
+    public void setIdConcessionaria(Concessionaria idConcessionaria) {
+        this.idConcessionaria = idConcessionaria;
     }
     
 }

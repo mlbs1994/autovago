@@ -14,9 +14,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -79,10 +81,14 @@ public class Endereco implements Serializable {
     private Float longitude;
     @Column(name = "latitude")
     private Float latitude;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEndereco")
-    private List<Concessionaria> concessionariaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEndereco")
-    private List<Usuario> usuarioList;
+    
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    private Usuario idUsuario;
+    
+    @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    private Concessionaria idConcessionaria;
 
     public Endereco() {
     }
@@ -180,24 +186,6 @@ public class Endereco implements Serializable {
         this.latitude = latitude;
     }
 
-    @XmlTransient
-    public List<Concessionaria> getConcessionariaList() {
-        return concessionariaList;
-    }
-
-    public void setConcessionariaList(List<Concessionaria> concessionariaList) {
-        this.concessionariaList = concessionariaList;
-    }
-
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -221,6 +209,34 @@ public class Endereco implements Serializable {
     @Override
     public String toString() {
         return "modelo.Endereco[ idEndereco=" + idEndereco + " ]";
+    }
+
+    /**
+     * @return the idUsuario
+     */
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    /**
+     * @return the idConcessionaria
+     */
+    public Concessionaria getIdConcessionaria() {
+        return idConcessionaria;
+    }
+
+    /**
+     * @param idConcessionaria the idConcessionaria to set
+     */
+    public void setIdConcessionaria(Concessionaria idConcessionaria) {
+        this.idConcessionaria = idConcessionaria;
     }
     
 }
