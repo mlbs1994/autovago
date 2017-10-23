@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloLoginCadastro.xhtml">
+
+            <ui:define name="content">
+                <!--<p:outputLabel id="slogan" value="O seu carro ideal pelo melhor preço!" />-->
+                <p:panel id="basic" styleClass="customTitleBar" 
+                         style="margin-bottom:20px; width: 300px; height: 200px; display: block; 
+                         margin-left: auto;  margin-right: auto; margin-top: 100px;  padding: 0px;">
+                    <f:facet name="header">
+                        LOGIN
+                    </f:facet>
+                    
+                    <h:form >
+                        <h:panelGrid columns="2" cellpadding="5">    
+                                <h:outputText class="labelFields" value="Login"  />
+                                <p:inputText id="loginField"  />
+                                
+                                <h:outputText class="labelFields" value="Senha"/>
+                                <p:password id="feedback"  feedback="true" />
+                                <p:commandButton value="Logar" action="home.xhtml" />
+                                
+                                
+                        </h:panelGrid>
+                    </h:form>
+                    <h:link outcome="cadastro.xhtml" style="padding-left: 10px; padding-top: 10px; ">Não tem cadastro, faça já o seu!</h:link>
+                </p:panel>  
+            </ui:define>
+
+     
+        </ui:composition>
+
+    </body>
+</html>
