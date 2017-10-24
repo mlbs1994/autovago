@@ -12,6 +12,7 @@ import static javax.ejb.TransactionManagementType.CONTAINER;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import modelo.Usuario;
 
@@ -33,6 +34,25 @@ public class UsuarioServico {
         em.persist(usuario);
     }
 
-  
+    public Usuario buscarPessoa(String login, String senha) {
+        Usuario usuario = null;
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha");
+        q.setParameter("login", login);
+        q.setParameter("senha", senha);
+        List<Usuario> usr = q.getResultList();
+
+        if (!(usr.isEmpty())) {
+            usuario = usr.get(0);
+        }
+
+        if (usuario == null) {
+            System.out.print("FALSE");
+
+        } else {
+            System.out.print("TRUE");
+        }
+
+        return usuario;
+    }
 
 }

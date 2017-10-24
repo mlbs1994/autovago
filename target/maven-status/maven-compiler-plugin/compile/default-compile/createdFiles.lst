@@ -15,6 +15,7 @@ beans/UsuarioBean.class
 modelo/Categoria.class
 modelo/Cliente.class
 modelo/Fabricante.class
+beans/LoginBean.class
 modelo/Concessionaria.class
 modelo/Automovel.class
 modelo/Categoria_.class

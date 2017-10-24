@@ -22,11 +22,11 @@
                     <h:form >
                         <h:panelGrid columns="2" cellpadding="5">    
                                 <h:outputText class="labelFields" value="Login"  />
-                                <p:inputText id="loginField"  />
+                                <p:inputText id="loginField" value="#{loginBean.username}" />
                                 
                                 <h:outputText class="labelFields" value="Senha"/>
-                                <p:password id="feedback"  feedback="true" />
-                                <p:commandButton value="Logar" action="home.xhtml" />
+                                <p:password id="feedback"  feedback="true" value="#{loginBean.senha}" />
+                                <p:commandButton value="Logar" action="#{loginBean.efetuarLogin()}" />
                                 
                                 
                         </h:panelGrid>
