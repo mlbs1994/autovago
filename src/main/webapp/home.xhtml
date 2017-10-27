@@ -9,6 +9,22 @@
 
     <ui:composition template="./modeloPrincipal.xhtml">
 
+        <ui:define name="top">
+            <div class="ui-g">
+                <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username"> #{loginBean.username}</span></h:outputLabel>
+                <h:graphicImage id="logo" class="ui-g-4" library="imgs" name="logo1.png" 
+                                style="height: 100px; "/>
+                <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 380px !important;" id="formLogout">
+                    <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
+                        Logout
+                    </h:commandLink>
+                </h:form>   
+                <!--<h:link id="logoutLink" style="font-size:  10pt !important;
+                                             padding-top: 40px !important; padding-left: 300px !important;
+                                             color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
+            </div> 
+        </ui:define>
+        
         <ui:define name="left">
             <h:form>
                 <h:panelGrid columns="1" cellpadding="5">    
@@ -22,22 +38,18 @@
 
             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                 <p:outputLabel for="categoriaFiltro" value="Categoria:" />
-                <p:selectOneMenu id="categoriaFiltro" value="" style="width:100px">
-                    <f:selectItem itemLabel="Select One" itemValue="" />
-                    <f:selectItem itemLabel="Categoria 1" itemValue="" />
-                    <f:selectItem itemLabel="Categoria 2" itemValue="" />
-                    <f:selectItem itemLabel="Categoria 3" itemValue="" />
+                <p:selectOneMenu id="categoriaFiltro" value="#{filtroBean.categoria}" style="width:100px">
+                    <f:selectItem itemLabel="Selecione" itemValue="0" />
+                    <f:selectItems var="categoria" itemValue="#{categoria.idCategoria}" itemLabel="#{categoria.nome}" value="#{filtroBean.categorias}"/>
                 </p:selectOneMenu>
 
                 <h:outputText value="Modelo"/>
                 <p:inputText id="modelo" style="width:120px"/>                
 
-                <p:outputLabel for="montadoraFiltro" value="Montadora:" />
-                <p:selectOneMenu id="montadoraFiltro" value="" style="width:100px">
-                    <f:selectItem itemLabel="Select One" itemValue="" />
-                    <f:selectItem itemLabel="Montadora 1" itemValue="" />
-                    <f:selectItem itemLabel="Montadora 2" itemValue="" />
-                    <f:selectItem itemLabel="Montadora 3" itemValue="" />
+                <p:outputLabel for="FabricanteFiltro" value="Fabricante:" />
+                <p:selectOneMenu id="FabricanteFiltro" value="#{filtroBean.fabricante}" style="width:100px">
+                    <f:selectItem itemLabel="Selecione" itemValue="0" />
+                    <f:selectItems var="fabricante" itemValue="#{fabricante.idFabricante}" itemLabel="#{fabricante.nome}" value="#{filtroBean.fabricantes}"/>
                 </p:selectOneMenu>
 
                 <h:outputText value="Ano"/>
@@ -51,6 +63,53 @@
                     <p:inputText id="precoMin" placeholder="Max" style="width:80px"/> 
                 </h:panelGrid>
             </h:panelGrid>
+        </ui:define>
+        
+        <ui:define name="content">
+            <h:outputLabel id="ofertasLabel">OFERTAS</h:outputLabel>
+            
+            <div class="ui-g" id="ofertasLista">
+                <div class="ui-g-6 listaCell">
+                    <h:panelGrid columns="2" style="border: none;">
+                         <h:graphicImage class="imgCarro" style="width:255px; height: 180px; margin: 0px; padding: 0px;" 
+                                         library="imgs" name="gol2017.jpg" /> 
+                         <h:panelGrid id="descrCarro" style="font-size: 13pt; padding-left: 10px;
+                                      font-weight: bold;">
+                             <h:outputLabel class="modeloCarro">Volkswagen Gol 2017</h:outputLabel>
+                             <h:graphicImage class="starRating" style="width:140px; height: 20px; margin: 0px; padding: 0px;" 
+                                         library="imgs" name="star-rating-4.jpg" />  
+                             <p:outputPanel style=" margin-top: 25px; margin-bottom: 25px; font-size: 9pt; font-weight: normal;">
+                                 Carro ótimo com direção hidraúlica
+                             </p:outputPanel>
+                             <span class="rating" style="height: 50px; width: 50px; background-color: green;
+                                   color: white; margin-top: 20px; padding: 5px; border-radius: 5px;">95</span>
+                             <span class="rating2" style="font-size: 9pt;"> Muito bom (1995 avaliações)</span>
+                         </h:panelGrid>
+                    </h:panelGrid>
+                </div>
+                <div class="ui-g-2 listaCell">
+                    <div class="nomeConcessionaria" 
+                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTONET</div>
+                    <div class="ofertaCarroConcessionaria" 
+                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 17.000,500</div>
+                     <div class="nomeConcessionaria" 
+                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTOMART</div>
+                    <div class="ofertaCarroConcessionaria" 
+                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 19.500,500</div>
+                          <div class="nomeConcessionaria" 
+                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTORODAS</div>
+                    <div class="ofertaCarroConcessionaria" 
+                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 21.100,900</div>   
+                </div>
+                <div class="ui-g-3 listaCell">
+                     <div class="nomeConcessionariaMelhorOferta" 
+                         style="font-size: 20pt; text-align: center; padding: 5px; padding-top: 50px; font-weight: bold;">AUTONET</div>
+                     <div class="ofertaCarroConcessionaria" 
+                         style="font-size: 15pt; text-align: center;padding: 5px; margin-bottom: 15px; color: #0a0; font-weight: bold;">R$ 17.000,500</div>
+                     <p:commandButton value="Ver Oferta" action="login.xhtml" id="btn_verOferta" 
+                                      style=" width: 100px; height: 30px; background-color: #0a0; color:#fff; display: block; margin: auto; margin-top: 40px;"/>   
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

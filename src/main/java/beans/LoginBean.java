@@ -39,7 +39,7 @@ public class LoginBean implements Serializable {
             return "/login";
 
         } else {
-            return "/home";
+            return "/home?faces-redirect=true";
         }
 
     }

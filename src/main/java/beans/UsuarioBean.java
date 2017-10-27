@@ -54,7 +54,7 @@ public class UsuarioBean implements Serializable {
         
     }
 
-    public void salvar() {
+    public String salvar() {
 
         try {
              Usuario usr = new Usuario();
@@ -82,6 +82,8 @@ public class UsuarioBean implements Serializable {
         catch (EJBException ex) {
             ex.printStackTrace();
         }
+        
+        return "login.xhtml";
     }
 
     /**

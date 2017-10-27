@@ -82,13 +82,7 @@ public class Endereco implements Serializable {
     @Column(name = "latitude")
     private Float latitude;
     
-    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
-    private Usuario idUsuario;
-    
-    @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
-    private Concessionaria idConcessionaria;
+  
 
     public Endereco() {
     }
@@ -212,31 +206,8 @@ public class Endereco implements Serializable {
     }
 
     /**
-     * @return the idUsuario
-     */
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    /**
      * @return the idConcessionaria
      */
-    public Concessionaria getIdConcessionaria() {
-        return idConcessionaria;
-    }
-
-    /**
-     * @param idConcessionaria the idConcessionaria to set
-     */
-    public void setIdConcessionaria(Concessionaria idConcessionaria) {
-        this.idConcessionaria = idConcessionaria;
-    }
+  
     
 }

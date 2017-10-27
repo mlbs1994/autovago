@@ -7,6 +7,7 @@ body
 {
     display: block;
     margin-right: -10px;
+    background-color: #fff;
 }
 
 #top {
@@ -81,3 +82,88 @@ body
 }
 
 
+#ofertasLabel
+{
+    font-size: 22pt;
+    font-family: Tahoma;
+    margin-left: 32%;
+}
+
+#ofertasLista
+{
+    margin-top: 30px;
+}
+
+.listaCell
+{
+    border: solid 2pt #eee;
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin: 9px;
+}
+
+.imgCarro
+{
+    border: none;
+    border-radius: 5px;
+    width:255px;
+    height: 180px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.descrCarro
+{
+   font-size: 13pt;
+   padding-left: 10px;
+   font-weight: bold;
+}
+
+.starRating
+{
+    width:140px; 
+    height: 20px; 
+    margin: 0px;
+    padding: 0px;
+}
+
+.modeloCarro
+{
+    
+}
+
+.pequenaDescrCarro
+{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 9pt;
+    font-weight: normal;
+}
+
+#boasVindas
+{
+    color: darkblue;
+    font-size:  10pt;
+    padding-top: 40px;
+    font-weight: bold;
+}
+
+#username
+{
+    color: #D20005;
+}
+
+#logoutLink
+{
+   
+}
+
+#logoutLink:hover
+{
+    color: red !important;
+}
+
+#logoutLink:active
+{
+    color: green !important;
+}
