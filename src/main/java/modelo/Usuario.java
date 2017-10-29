@@ -7,16 +7,13 @@ package modelo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -60,9 +57,7 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
     
-    @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
-    private Endereco idEndereco;
+    
 
     public Usuario() {
     }
@@ -121,13 +116,6 @@ public class Usuario implements Serializable {
 
     
 
-    public Endereco getIdEndereco() {
-        return idEndereco;
-    }
-
-    public void setIdEndereco(Endereco idEndereco) {
-        this.idEndereco = idEndereco;
-    }
 
     @Override
     public int hashCode() {

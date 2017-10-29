@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,6 +46,10 @@ public class Cliente implements Serializable {
     private Usuario idUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private List<Avaliacao> avaliacaoList;
+    
+    @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    private Endereco idEndereco;
 
     public Cliente() {
     }
@@ -101,6 +106,20 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "modelo.Cliente[ idCliente=" + idCliente + " ]";
+    }
+
+    /**
+     * @return the idEndereco
+     */
+    public Endereco getIdEndereco() {
+        return idEndereco;
+    }
+
+    /**
+     * @param idEndereco the idEndereco to set
+     */
+    public void setIdEndereco(Endereco idEndereco) {
+        this.idEndereco = idEndereco;
     }
     
 }

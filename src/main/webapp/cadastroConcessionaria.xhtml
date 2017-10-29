@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloLoginCadastro.xhtml">
+
+
+
+            <ui:define name="content">
+                <div id="conteudoCadastro">
+                    <p:panel id="basic" header="Cadastro Concessionaria - Autovago" styleClass="customTitleBar" 
+                             style="margin-bottom:50px; width: 550px; height: 670px; display: block; 
+                             margin-left: auto;  margin-right: auto; margin-top: 0px; ">
+
+                        <h:form >                        
+                            <h:panelGrid columns="2" cellpadding="5"> 
+
+                                <h:outputText class="labelFields" value="Cnpj" />
+                                <p:inputText id="cnpj" size="30" value="#{concessionariaBean.cnpj}">
+                                </p:inputText>
+
+                                <h:outputText class="labelFields" value="Nome da Concessionaria" />
+                                <p:inputText id="nomeConcessionaria" size="30" value="#{concessionariaBean.nomeConcessionaria}">
+                                </p:inputText>
+
+                                <h:outputText class="labelFields" value="Site" />
+                                <p:inputText id="site" size="40" value="#{concessionariaBean.site}">
+                                </p:inputText>
+
+                                <h:outputText class="labelFields" value="Logradouro: " />
+                                <p:inputText id="logConcessionaria" size="40" value="#{concessionariaBean.logradouro}"  />
+
+                                <h:outputText class="labelFields" value="Número: " />
+                                <p:inputText id="numConcessionaria" size="10"  value="#{concessionariaBean.numero}"/>
+
+                                <h:outputText class="labelFields" value="Complemento: "  />
+                                <p:inputText id="compConcessionaria" size="15" value="#{concessionariaBean.complemento}"/>
+
+                                <h:outputText class="labelFields" value="Bairro: " />
+                                <p:inputText id="bairroConcessionaria" size="30" value="#{concessionariaBean.bairro}"  />
+
+                                <h:outputText class="labelFields" value="Cidade: " />
+                                <p:inputText id="cidadeConcessionaria" value="#{concessionariaBean.cidade}" />
+
+                                <h:outputText class="labelFields" value="Estado: " />
+                                <p:selectOneMenu id="estadoConcessionaria"  style="width:85px" value="#{concessionariaBean.estado}">
+                                    <f:selectItem itemLabel="AC" itemValue="Acre" />
+                                    <f:selectItem itemLabel="AL" itemValue="Alagoas" />
+                                    <f:selectItem itemLabel="AP" itemValue="Amapá" />
+                                    <f:selectItem itemLabel="AM" itemValue="Amazonas" />
+                                    <f:selectItem itemLabel="BA" itemValue="Bahia" />
+                                    <f:selectItem itemLabel="CE" itemValue="Ceará" />
+                                    <f:selectItem itemLabel="DF" itemValue="Distrito Federal" />
+                                    <f:selectItem itemLabel="ES" itemValue="Espirito Santo" />
+                                    <f:selectItem itemLabel="GO" itemValue="Goiás"/>
+                                    <f:selectItem itemLabel="MA" itemValue="Maranhão" />
+                                    <f:selectItem itemLabel="MT" itemValue="Mato Grosso" />
+                                    <f:selectItem itemLabel="MS" itemValue="Mato Grosso do Sul" />
+                                    <f:selectItem itemLabel="MG" itemValue="Minas Gerais" />
+                                    <f:selectItem itemLabel="PA" itemValue="Pará" />
+                                    <f:selectItem itemLabel="PB" itemValue="Paraíba" />
+                                    <f:selectItem itemLabel="PR" itemValue="Paraná" />
+                                    <f:selectItem itemLabel="PE" itemValue="Pernambuco" />
+                                    <f:selectItem itemLabel="PI" itemValue="Piauí" />
+                                    <f:selectItem itemLabel="RJ" itemValue="Rio de Janeiro" />
+                                    <f:selectItem itemLabel="RN" itemValue="Rio Grande do Norte" />
+                                    <f:selectItem itemLabel="RS" itemValue="Rio Grande do Sul" />
+                                    <f:selectItem itemLabel="RO" itemValue="Rondonia" />
+                                    <f:selectItem itemLabel="RR" itemValue="Roraima" />
+                                    <f:selectItem itemLabel="SC" itemValue="Santa Catarina" />
+                                    <f:selectItem itemLabel="SP" itemValue="São Paulo" />
+                                    <f:selectItem itemLabel="SE" itemValue="Sergipe" />
+                                    <f:selectItem itemLabel="TO" itemValue="Tocantins" />
+                                </p:selectOneMenu>
+
+                                <h:outputText class="labelFields" value="CEP: " />
+                                <p:inputText id="cepConcessionaria" value="#{concessionariaBean.cep}" />
+                                
+                                <h:outputText class="labelFields" value="Nome Administrador" />
+                                <p:inputText id="nomeAdmConcessionaria" size="40" value="#{concessionariaBean.nome}">
+                                </p:inputText>
+
+                                <h:outputText class="labelFields" value="Email Administrador" />
+                                <p:inputText id="emailAdmConcessionaria" size="40" value="#{concessionariaBean.email}">
+                                </p:inputText>
+
+                                <h:outputText class="labelFields" value="Login Administrador: " />
+                                <p:inputText id="loginAdmConcessionaria" size="20" value="#{concessionariaBean.login}"/>
+
+                                <h:outputText class="labelFields" value="Senha: " />
+                                <p:password id="senhaAdmConcessionaria" required="true" value="#{concessionariaBean.senha}"/>
+
+                                <h:outputText class="labelFields" value="Confirme a senha: " />
+                                <p:password id="senhaAdmConcessionariaConfirm" />
+
+                                <p:commandButton value="Cadastrar" action="#{concessionariaBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
+                                <h:link outcome="login.xhtml">Voltar</h:link>   
+
+                            </h:panelGrid>
+                        </h:form>    
+                    </p:panel>
+                </div>    
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

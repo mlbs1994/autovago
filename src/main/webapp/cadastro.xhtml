@@ -22,30 +22,30 @@
                         <h:panelGrid columns="2" cellpadding="5"> 
                             
                             <h:outputText class="labelFields" value="Nome" />
-                            <p:inputText id="nomeField" size="50" value="#{usuarioBean.nome}">
+                            <p:inputText id="nomeField" size="50" value="#{clienteBean.nome}">
                             </p:inputText>
                             
                             <h:outputText class="labelFields" value="Email" />
-                            <p:inputText id="emailField" size="50" value="#{usuarioBean.email}">
+                            <p:inputText id="emailField" size="50" value="#{clienteBean.email}">
                             </p:inputText>
                             
                             <h:outputText class="labelFields" value="Logradouro: " />
-                            <p:inputText id="logField" size="50" value="#{usuarioBean.logradouro}"  />
+                            <p:inputText id="logField" size="50" value="#{clienteBean.logradouro}"  />
                             
                             <h:outputText class="labelFields" value="Número: " />
-                            <p:inputText id="numField" size="10"  value="#{usuarioBean.numero}"/>
+                            <p:inputText id="numField" size="10"  value="#{clienteBean.numero}"/>
                             
                             <h:outputText class="labelFields" value="Complemento: "  />
-                            <p:inputText id="compField" size="15" value="#{usuarioBean.complemento}"/>
+                            <p:inputText id="compField" size="15" value="#{clienteBean.complemento}"/>
                             
                             <h:outputText class="labelFields" value="Bairro: " />
-                            <p:inputText id="bairroField" size="30" value="#{usuarioBean.bairro}"  />
+                            <p:inputText id="bairroField" size="30" value="#{clienteBean.bairro}"  />
                             
                             <h:outputText class="labelFields" value="Cidade: " />
-                            <p:inputText id="cidadeField" value="#{usuarioBean.cidade}" />
+                            <p:inputText id="cidadeField" value="#{clienteBean.cidade}" />
                             
                             <h:outputText class="labelFields" value="Estado: " />
-                            <p:selectOneMenu id="estadoField"  style="width:85px" value="#{usuarioBean.estado}">
+                            <p:selectOneMenu id="estadoField"  style="width:85px" value="#{clienteBean.estado}">
                                 <f:selectItem itemLabel="AC" itemValue="Acre" />
                                 <f:selectItem itemLabel="AL" itemValue="Alagoas" />
                                 <f:selectItem itemLabel="AP" itemValue="Amapá" />
@@ -76,18 +76,18 @@
                             </p:selectOneMenu>
                             
                             <h:outputText class="labelFields" value="CEP: " />
-                            <p:inputText id="cepField" value="#{usuarioBean.cep}" />
+                            <p:inputText id="cepField" value="#{clienteBean.cep}" />
                             
                             <h:outputText class="labelFields" value="Login: " />
-                            <p:inputText id="loginField" size="20" value="#{usuarioBean.login}"/>
+                            <p:inputText id="loginField" size="20" value="#{clienteBean.login}"/>
                           
                             <h:outputText class="labelFields" value="Senha: " />
-                            <p:password id="senhaField" required="true" value="#{usuarioBean.senha}"/>
+                            <p:password id="senhaField" required="true" value="#{clienteBean.senha}"/>
                                                          
                             <h:outputText class="labelFields" value="Confirme a senha: " />
                             <p:password id="senhaFieldConfirm"  feedback="true" />
                                
-                            <p:commandButton value="Cadastrar" action="#{usuarioBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
+                            <p:commandButton value="Cadastrar" action="#{clienteBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
                             <h:link outcome="login.xhtml">Voltar</h:link>   
                             
                         </h:panelGrid>

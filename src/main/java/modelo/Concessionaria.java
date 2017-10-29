@@ -67,10 +67,10 @@ public class Concessionaria implements Serializable {
     @Column(name = "cnpj")
     private String cnpj;
     @JoinColumn(name = "idAdmConcessionaria", referencedColumnName = "idAdmConcessionaria")
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
     private AdmConcessionaria idAdmConcessionaria;
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
     private Endereco idEndereco;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcessionaria")
     private List<Oferta> ofertaList;
