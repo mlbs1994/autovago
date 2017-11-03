@@ -54,5 +54,14 @@ public class UsuarioServico {
 
         return usuario;
     }
-
+    
+    public void alterarDadosUsuario(Usuario usr)
+    {
+        this.em.merge(usr);
+    }
+    
+    public void excluirConta(Usuario usr)
+    {
+        this.em.remove(usr);
+    }
 }

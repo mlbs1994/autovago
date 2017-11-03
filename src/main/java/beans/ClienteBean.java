@@ -10,6 +10,10 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import modelo.Cliente;
 import modelo.Endereco;
 import modelo.Usuario;
@@ -54,6 +58,7 @@ public class ClienteBean implements Serializable {
     private String estado;
     private String cep;
     
+    
   
     public String salvar() {
 
@@ -90,6 +95,29 @@ public class ClienteBean implements Serializable {
         }
         
         return "login.xhtml";
+    }
+    
+    public void alterarDadosCadastrais()
+    {
+        this.usuarioServico.alterarDadosUsuario(this.usuarioLogado);
+    }
+    
+    public String excluirContaUsuario() throws ServletException
+    {
+        this.usuarioServico.excluirConta(this.usuarioLogado);
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        if(session!=null)
+        {
+            session.invalidate();
+        }
+        
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        req.logout();
+        
+        return "login.xhtml?faces-redirect=true";
+     
     }
 
     public Usuario getUsuarioLogado() {

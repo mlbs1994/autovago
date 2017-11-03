@@ -7,21 +7,13 @@ package beans;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import servico.UsuarioServico;
 
-/**
- *
- * @author marcia
- */
-@ManagedBean
-@SessionScoped
 public class LoginBean implements Serializable {
 
     @EJB
@@ -29,6 +21,8 @@ public class LoginBean implements Serializable {
 
     private String username;
     private String senha;
+    
+    private Usuario usuarioLogado;
 
     public LoginBean() {
     }
@@ -39,21 +33,16 @@ public class LoginBean implements Serializable {
             return "/login";
 
         } else {
+            this.usuarioLogado = usuario;
             return "/home?faces-redirect=true";
         }
 
     }
-
-    /**
-     * @return the UsuarioServico
-     */
+    
     public UsuarioServico getUsuarioServico() {
         return UsuarioServico;
     }
-
-    /**
-     * @param UsuarioServico the UsuarioServico to set
-     */
+    
     public void setUsuarioServico(UsuarioServico UsuarioServico) {
         this.UsuarioServico = UsuarioServico;
     }
@@ -85,5 +74,15 @@ public class LoginBean implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+    
+    
 
 }

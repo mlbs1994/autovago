@@ -11,14 +11,20 @@
 
         <ui:define name="top">
             <div class="ui-g">
-                <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username"> #{loginBean.username}</span></h:outputLabel>
+                <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username">#{loginBean.username}</span></h:outputLabel>
                 <h:graphicImage id="logo" class="ui-g-4" library="imgs" name="logo1.png" 
                                 style="height: 100px; "/>
-                <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 380px !important;" id="formLogout">
-                    <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
-                        Logout
-                    </h:commandLink>
-                </h:form>   
+                <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 240px !important;" id="formLogout">
+                    <h:panelGrid columns="2">
+                        <h:link  id="alterarContaLink" style="color: darkblue !important; padding-right: 20px; " outcome="detalhesConta.xhtml?faces-redirect=true">
+                            Minha conta
+                        </h:link>
+                        <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
+                            Logout
+                        </h:commandLink>
+                    </h:panelGrid>    
+                </h:form>
+                
                 <!--<h:link id="logoutLink" style="font-size:  10pt !important;
                                              padding-top: 40px !important; padding-left: 300px !important;
                                              color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
@@ -27,46 +33,114 @@
         
         <ui:define name="left">
             <h:form>
-                <h:panelGrid columns="1" cellpadding="5">    
-                    <h:outputText value="Buscar Ofertas"/>
-                    <p:inputText id="buscarCarro"  />
-                    <p:commandButton value="Buscar" />
+                <h:panelGrid id="panelSearchOferta" columns="1" cellpadding="5" 
+                             style="width: 250px; text-align: center; font-family: Helvetica; font-size: 12pt; font-weight: bold;">    
+                    <h:outputText id="labelSearchOferta" value="Buscar Ofertas"/>
+                    <p:inputText id="buscarCarro" placeholder="Digite sua busca"
+                             style="font-size: 8pt; width: 208.2px; border-radius: 10px; "/>
+                    <p:commandButton value="Buscar" 
+                             style="font-size: 8pt; width: 166.6px; border-radius: 5px;" />
                 </h:panelGrid>
             </h:form>
 
             <p:separator />
 
-            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                <p:outputLabel for="categoriaFiltro" value="Categoria:" />
-                <p:selectOneMenu id="categoriaFiltro" value="#{filtroBean.categoria}" style="width:100px">
-                    <f:selectItem itemLabel="Selecione" itemValue="0" />
-                    <f:selectItems var="categoria" itemValue="#{categoria.idCategoria}" itemLabel="#{categoria.nome}" value="#{filtroBean.categorias}"/>
-                </p:selectOneMenu>
+            <h:panelGrid columns="1" style="text-align: center; font-family: Helvetica;">
+                <h:outputText id="labelSearchOfertaAvancado" value="Filtro" 
+                              style="font-size: 12pt; font-weight: bold;"/>
+                <h:panelGrid id="panelSearchOfertaAvancado" columns="2" cellpadding="5"
+                             style="margin-bottom:10px;" >
+                    <p:outputLabel for="categoriaFiltro" value="Categoria"  
+                                   style="font-size: 8pt; font-weight: bold;"/>
+                    <p:selectOneMenu id="categoriaFiltro" value="#{filtroBean.categoria}" 
+                                   style="width:120px; font-size: 8pt;">
+                        <f:selectItem itemLabel="Selecione" itemValue="0" />
+                        <f:selectItems var="categoria" itemValue="#{categoria.idCategoria}" itemLabel="#{categoria.nome}" value="#{filtroBean.categorias}"/>
+                    </p:selectOneMenu>
 
-                <h:outputText value="Modelo"/>
-                <p:inputText id="modelo" style="width:120px"/>                
+                    <h:outputText value="Modelo"
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <p:inputText id="modelo" 
+                                  style="width:133px; font-size: 8pt;"/>                
 
-                <p:outputLabel for="FabricanteFiltro" value="Fabricante:" />
-                <p:selectOneMenu id="FabricanteFiltro" value="#{filtroBean.fabricante}" style="width:100px">
-                    <f:selectItem itemLabel="Selecione" itemValue="0" />
-                    <f:selectItems var="fabricante" itemValue="#{fabricante.idFabricante}" itemLabel="#{fabricante.nome}" value="#{filtroBean.fabricantes}"/>
-                </p:selectOneMenu>
+                    <p:outputLabel for="FabricanteFiltro" value="Fabricante:" 
+                                   style="font-size: 8pt; font-weight: bold;"/>
+                    <p:selectOneMenu id="FabricanteFiltro" value="#{filtroBean.fabricante}" 
+                                   style="width:120px; font-size: 8pt;">
+                        <f:selectItem itemLabel="Selecione" itemValue="0" />
+                        <f:selectItems var="fabricante" itemValue="#{fabricante.idFabricante}" itemLabel="#{fabricante.nome}" value="#{filtroBean.fabricantes}"/>
+                    </p:selectOneMenu>
 
-                <h:outputText value="Ano"/>
-                <p:inputText id="ano" style="width:120px"/> 
+                    <h:outputText value="Ano"
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <p:inputText id="ano" 
+                                  style="width:133px; font-size: 8pt;"/> 
 
-            </h:panelGrid>
-            <h:panelGrid columns="1" cellpadding="2">
-                <h:outputText value="Preço:"/>
-                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                    <p:inputText id="precoMax" placeholder="Min" style="width:80px"/>   
-                    <p:inputText id="precoMin" placeholder="Max" style="width:80px"/> 
                 </h:panelGrid>
-            </h:panelGrid>
+            
+                <h:panelGrid columns="1" cellpadding="2" style="text-align: center; padding-left: 8px; ">
+                    <h:outputLabel   value="Preço" 
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                        <p:inputNumber id="precoMax" placeholder="Min"  size="9" />  
+                        <p:inputNumber id="precoMin" placeholder="Max"  size="9" />  
+                    </h:panelGrid>
+                    <h:outputLabel   value="Estrelas" 
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <p:rating value="1" style="width: 200px;" />
+                    <h:outputLabel   value="Avaliação dos usuários" 
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <p:panelGrid columns="5">
+                        <span class="rating" style="height: 70px; width: 70px; background-color: red;
+                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
+                            0+
+                        </span>
+                        <span class="rating" style="height: 70px; width: 70px; background-color: greenyellow;
+                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
+                            70+
+                        </span>
+                        <span class="rating" style="height: 70px; width: 70px; background-color: #0b0;
+                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
+                            75+
+                        </span>
+                        <span class="rating" style="height: 70px; width: 70px; background-color: #0a0;
+                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
+                            80+
+                        </span>
+                        <span class="rating" style="height: 70px; width: 70px; background-color: green;
+                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
+                            85+
+                        </span>
+                    </p:panelGrid>
+                    <h:outputLabel   value="Especificações" 
+                                  style="font-size: 8pt; font-weight: bold;"/>
+                    <p:panelGrid columns="3" style="margin-left: 30px;">
+                        <p:graphicImage library="imgs" name="icon1.png" alt='0 Km' title="0 Km"
+                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
+                        <p:graphicImage library="imgs" name="icon2.png" alt='Câmbio Automático' title="Câmbio Automático"
+                                        style='width: 35px; height: 35px; border-radius: 3px;' />
+                        <p:graphicImage library="imgs" name="icon3.png" alt='4 Portas' title="4 Portas"
+                                        style='width: 35px; height: 35px; border-radius: 3px;' />
+                        <p:graphicImage library="imgs" name="icon4.png" alt='Direção Hidraúlica' title="Direção Hidraúlica"
+                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
+                        <p:graphicImage library="imgs" name="icon5.png" alt='Computador de bordo' title="Computador de bordo"
+                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
+                        <p:graphicImage library="imgs" name="icon6.png" alt='Antiroubo' title="Antiroubo"
+                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
+                    </p:panelGrid>
+                </h:panelGrid>
+                </h:panelGrid>
+                
+           
         </ui:define>
         
         <ui:define name="content">
-            <h:outputLabel id="ofertasLabel">OFERTAS</h:outputLabel>
+            <h:outputLabel id="ofertasLabel" style="font-family: Helvetica;">OFERTAS</h:outputLabel>
             
             <div class="ui-g" id="ofertasLista">
                 <div class="ui-g-6 listaCell">
