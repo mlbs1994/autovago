@@ -6,15 +6,12 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import modelo.Avaliacao;
 import modelo.Endereco;
-import modelo.Usuario;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-31T10:50:45")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-04T18:27:42")
 @StaticMetamodel(Cliente.class)
-public class Cliente_ { 
+public class Cliente_ extends Usuario_ {
 
-    public static volatile SingularAttribute<Cliente, Integer> idCliente;
     public static volatile SingularAttribute<Cliente, Endereco> idEndereco;
-    public static volatile SingularAttribute<Cliente, Usuario> idUsuario;
     public static volatile ListAttribute<Cliente, Avaliacao> avaliacaoList;
 
 }

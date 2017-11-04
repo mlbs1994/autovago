@@ -23,15 +23,15 @@
                                 <h:panelGrid columns="2" cellpadding="5"> 
 
                                     <h:outputText class="labelFields" value="CNPJ" />
-                                    <p:inputText id="cnpj" size="30" value="#{concessionariaBean.cnpj}">
+                                    <p:inputText id="cnpj" size="30" value="#{admConcessionariaBean.cnpj}">
                                     </p:inputText>
 
                                     <h:outputText class="labelFields" value="Nome da Concessionária" />
-                                    <p:inputText id="nomeConcessionaria" size="30" value="#{concessionariaBean.nomeConcessionaria}">
+                                    <p:inputText id="nomeConcessionaria" size="30" value="#{admConcessionariaBean.nomeConcessionaria}">
                                     </p:inputText>
 
                                     <h:outputText class="labelFields" value="Site" />
-                                    <p:inputText id="site" size="40" value="#{concessionariaBean.site}">
+                                    <p:inputText id="site" size="40" value="#{admConcessionariaBean.site}">
                                     </p:inputText>
                                     
                                 </h:panelGrid>
@@ -49,22 +49,22 @@
                                 <h:panelGrid columns="2">
 
                                     <h:outputText class="labelFields" value="Logradouro: " />
-                                    <p:inputText id="logConcessionaria" size="40" value="#{concessionariaBean.logradouro}"  />
+                                    <p:inputText id="logConcessionaria" size="40" value="#{admConcessionariaBean.logradouro}"  />
 
                                     <h:outputText class="labelFields" value="Número: " />
-                                    <p:inputText id="numConcessionaria" size="10"  value="#{concessionariaBean.numero}"/>
+                                    <p:inputText id="numConcessionaria" size="10"  value="#{admConcessionariaBean.numero}"/>
 
                                     <h:outputText class="labelFields" value="Complemento: "  />
-                                    <p:inputText id="compConcessionaria" size="15" value="#{concessionariaBean.complemento}"/>
+                                    <p:inputText id="compConcessionaria" size="15" value="#{admConcessionariaBean.complemento}"/>
 
                                     <h:outputText class="labelFields" value="Bairro: " />
-                                    <p:inputText id="bairroConcessionaria" size="30" value="#{concessionariaBean.bairro}"  />
+                                    <p:inputText id="bairroConcessionaria" size="30" value="#{admConcessionariaBean.bairro}"  />
 
                                     <h:outputText class="labelFields" value="Cidade: " />
-                                    <p:inputText id="cidadeConcessionaria" value="#{concessionariaBean.cidade}" />
+                                    <p:inputText id="cidadeConcessionaria" value="#{admConcessionariaBean.cidade}" />
 
                                     <h:outputText class="labelFields" value="Estado: " />
-                                    <p:selectOneMenu id="estadoConcessionaria"  style="width:85px" value="#{concessionariaBean.estado}">
+                                    <p:selectOneMenu id="estadoConcessionaria"  style="width:85px" value="#{admConcessionariaBean.estado}">
                                         <f:selectItem itemLabel="AC" itemValue="Acre" />
                                         <f:selectItem itemLabel="AL" itemValue="Alagoas" />
                                         <f:selectItem itemLabel="AP" itemValue="Amapá" />
@@ -95,7 +95,7 @@
                                     </p:selectOneMenu>
 
                                     <h:outputText class="labelFields" value="CEP: " />
-                                    <p:inputText id="cepConcessionaria" value="#{concessionariaBean.cep}" />
+                                    <p:inputText id="cepConcessionaria" value="#{admConcessionariaBean.cep}" />
 
                                 </h:panelGrid>
                                 
@@ -112,23 +112,23 @@
                                 <h:panelGrid columns="2">
                                     
                                     <h:outputText class="labelFields" value="Nome Administrador" />
-                                    <p:inputText id="nomeAdmConcessionaria" size="40" value="#{concessionariaBean.nome}">
+                                    <p:inputText id="nomeAdmConcessionaria" size="40" value="#{admConcessionariaBean.nome}">
                                     </p:inputText>
 
                                     <h:outputText class="labelFields" value="Email Administrador" />
-                                    <p:inputText id="emailAdmConcessionaria" size="40" value="#{concessionariaBean.email}">
+                                    <p:inputText id="emailAdmConcessionaria" size="40" value="#{admConcessionariaBean.email}">
                                     </p:inputText>
 
                                     <h:outputText class="labelFields" value="Login Administrador: " />
-                                    <p:inputText id="loginAdmConcessionaria" size="20" value="#{concessionariaBean.login}"/>
+                                    <p:inputText id="loginAdmConcessionaria" size="20" value="#{admConcessionariaBean.login}"/>
 
                                     <h:outputText class="labelFields" value="Senha: " />
-                                    <p:password id="senhaAdmConcessionaria" required="true" value="#{concessionariaBean.senha}"/>
+                                    <p:password id="senhaAdmConcessionaria" required="true" value="#{admConcessionariaBean.senha}"/>
 
                                     <h:outputText class="labelFields" value="Confirme a senha: " />
                                     <p:password id="senhaAdmConcessionariaConfirm" />
 
-                                    <p:commandButton value="Cadastrar" action="#{concessionariaBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
+                                    <p:commandButton value="Cadastrar" action="#{admConcessionariaBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
                                     <h:link outcome="login.xhtml">Voltar</h:link>   
 
                                 </h:panelGrid>

@@ -29,30 +29,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "avaliacao", catalog = "autovago", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Avaliacao.findAll", query = "SELECT a FROM Avaliacao a"),
-    @NamedQuery(name = "Avaliacao.findByIdAvaliacao", query = "SELECT a FROM Avaliacao a WHERE a.idAvaliacao = :idAvaliacao"),
-    @NamedQuery(name = "Avaliacao.findByNota", query = "SELECT a FROM Avaliacao a WHERE a.nota = :nota"),
+    @NamedQuery(name = "Avaliacao.findAll", query = "SELECT a FROM Avaliacao a")
+    ,
+    @NamedQuery(name = "Avaliacao.findByIdAvaliacao", query = "SELECT a FROM Avaliacao a WHERE a.idAvaliacao = :idAvaliacao")
+    ,
+    @NamedQuery(name = "Avaliacao.findByNota", query = "SELECT a FROM Avaliacao a WHERE a.nota = :nota")
+    ,
     @NamedQuery(name = "Avaliacao.findByComentario", query = "SELECT a FROM Avaliacao a WHERE a.comentario = :comentario")})
 public class Avaliacao implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idAvaliacao")
     private Integer idAvaliacao;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "nota")
     private int nota;
+
     @Size(max = 1000)
     @Column(name = "comentario")
     private String comentario;
+
     @JoinColumn(name = "idAutomovel", referencedColumnName = "idAutomovel")
     @ManyToOne(optional = false)
     private Automovel idAutomovel;
-    @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
+
+    @JoinColumn(name = "idCliente")
     @ManyToOne(optional = false)
-    private Cliente idCliente;
+    private Cliente cliente;
 
     public Avaliacao() {
     }
@@ -98,14 +106,6 @@ public class Avaliacao implements Serializable {
         this.idAutomovel = idAutomovel;
     }
 
-    public Cliente getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -130,5 +130,20 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "modelo.Avaliacao[ idAvaliacao=" + idAvaliacao + " ]";
     }
-    
+
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
 }
+

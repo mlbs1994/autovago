@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -51,27 +50,31 @@ public class Concessionaria implements Serializable {
     @Basic(optional = false)
     @Column(name = "idConcessionaria")
     private Integer idConcessionaria;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     @Column(name = "nome")
     private String nome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
     @Column(name = "site")
     private String site;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "cnpj")
     private String cnpj;
-    @JoinColumn(name = "idAdmConcessionaria", referencedColumnName = "idAdmConcessionaria")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
-    private AdmConcessionaria idAdmConcessionaria;
+    
+    
+    
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
     @OneToOne(optional = false, cascade = CascadeType.PERSIST)
     private Endereco idEndereco;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcessionaria")
     private List<Oferta> ofertaList;
 
@@ -121,13 +124,6 @@ public class Concessionaria implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public AdmConcessionaria getIdAdmConcessionaria() {
-        return idAdmConcessionaria;
-    }
-
-    public void setIdAdmConcessionaria(AdmConcessionaria idAdmConcessionaria) {
-        this.idAdmConcessionaria = idAdmConcessionaria;
-    }
 
     public Endereco getIdEndereco() {
         return idEndereco;

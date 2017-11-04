@@ -44,10 +44,12 @@ public class Endereco implements Serializable {
     @Basic(optional = false)
     @Column(name = "idEndereco")
     private Integer idEndereco;
+    
     @Basic(optional = false)
     @Size(min = 1, max = 200)
     @Column(name = "logradouro")
     private String logradouro;
+    
     @Column(name = "numero")
     private Integer numero;
     @Size(max = 45)
@@ -57,18 +59,22 @@ public class Endereco implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "bairro")
     private String bairro;
+    
     @Basic(optional = false)
     @Size(min = 1, max = 100)
     @Column(name = "cidade")
     private String cidade;
+    
     @Basic(optional = false)
     @Size(min = 1, max = 40)
     @Column(name = "estado")
     private String estado;
+    
     @Basic(optional = false)
     @Size(min = 1, max = 15)
     @Column(name = "cep")
     private String cep;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "longitude")
     private Float longitude;

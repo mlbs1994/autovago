@@ -6,16 +6,12 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -24,69 +20,55 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Matheus Levi
  */
 @Entity
+@DiscriminatorValue(value = "A")
+@PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
 @Table(name = "adm_concessionaria", catalog = "autovago", schema = "")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "AdmConcessionaria.findAll", query = "SELECT a FROM AdmConcessionaria a"),
-    @NamedQuery(name = "AdmConcessionaria.findByIdAdmConcessionaria", query = "SELECT a FROM AdmConcessionaria a WHERE a.idAdmConcessionaria = :idAdmConcessionaria")})
-public class AdmConcessionaria implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idAdmConcessionaria")
-    private Integer idAdmConcessionaria;
-    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    @OneToOne(optional = false)
-    private Usuario idUsuario;
+public class AdmConcessionaria extends Usuario implements Serializable {
+    
+    @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    private Concessionaria Concessionaria;
 
     public AdmConcessionaria() {
     }
 
-    public AdmConcessionaria(Integer idAdmConcessionaria) {
-        this.idAdmConcessionaria = idAdmConcessionaria;
-    }
-
-    public Integer getIdAdmConcessionaria() {
-        return idAdmConcessionaria;
-    }
-
-    public void setIdAdmConcessionaria(Integer idAdmConcessionaria) {
-        this.idAdmConcessionaria = idAdmConcessionaria;
-    }
-
-
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
+   
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idAdmConcessionaria != null ? idAdmConcessionaria.hashCode() : 0);
-        return hash;
+        return super.hashCode();
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AdmConcessionaria)) {
-            return false;
+    public boolean equals(Object o) {
+       
+        if (o != null)
+        {
+            if (o instanceof AdmConcessionaria)
+            {
+                AdmConcessionaria outra = (AdmConcessionaria) o;
+                if (this.idUsuario == outra.idUsuario)
+                {
+                    return true;
+                }
+            }
         }
-        AdmConcessionaria other = (AdmConcessionaria) object;
-        if ((this.idAdmConcessionaria == null && other.idAdmConcessionaria != null) || (this.idAdmConcessionaria != null && !this.idAdmConcessionaria.equals(other.idAdmConcessionaria))) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
-    @Override
-    public String toString() {
-        return "modelo.AdmConcessionaria[ idAdmConcessionaria=" + idAdmConcessionaria + " ]";
+    /**
+     * @return the Concessionaria
+     */
+    public Concessionaria getConcessionaria() {
+        return Concessionaria;
     }
 
+    /**
+     * @param Concessionaria the Concessionaria to set
+     */
+    public void setConcessionaria(Concessionaria Concessionaria) {
+        this.Concessionaria = Concessionaria;
+    }
+
+   
 }

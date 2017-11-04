@@ -3,13 +3,12 @@ package modelo;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import modelo.Usuario;
+import modelo.Concessionaria;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-31T10:50:45")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-04T18:27:42")
 @StaticMetamodel(AdmConcessionaria.class)
-public class AdmConcessionaria_ { 
+public class AdmConcessionaria_ extends Usuario_ {
 
-    public static volatile SingularAttribute<AdmConcessionaria, Integer> idAdmConcessionaria;
-    public static volatile SingularAttribute<AdmConcessionaria, Usuario> idUsuario;
+    public static volatile SingularAttribute<AdmConcessionaria, Concessionaria> Concessionaria;
 
 }

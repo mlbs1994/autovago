@@ -11,10 +11,9 @@ import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import modelo.AdmConcessionaria;
-import modelo.Cliente;
 import modelo.Concessionaria;
 import modelo.Endereco;
-import modelo.Usuario;
+import servico.AdmConcessionariaServico;
 import servico.ConcessionariaServico;
 import servico.UsuarioServico;
 
@@ -25,12 +24,12 @@ import servico.UsuarioServico;
 @ManagedBean
 @SessionScoped
 public class ConcessionariaBean implements Serializable {
-
-    @EJB
-    private ConcessionariaServico concessionariaServico;
     
     @EJB
     private UsuarioServico usuarioServico;
+    
+    @EJB
+    private AdmConcessionariaServico AdmConcessionariaServico;
 
     public ConcessionariaBean() {
     }
@@ -58,17 +57,15 @@ public class ConcessionariaBean implements Serializable {
     public String salvar() {
 
         try {
-             Usuario usr = new Usuario();
+             
              Concessionaria concessionaria = new Concessionaria();
              AdmConcessionaria admConcessionaria = new AdmConcessionaria();
         
-        usr.setNome(this.getNome());
-        usr.setEmail(this.getEmail());
-        usr.setLogin(this.getLogin());
-        usr.setSenha(this.getSenha());
+        admConcessionaria.setNome(this.getNome());
+        admConcessionaria.setEmail(this.getEmail());
+        admConcessionaria.setLogin(this.getLogin());
+        admConcessionaria.setSenha(this.getSenha());
         
-        this.getUsuarioServico().salvar(usr);
-        admConcessionaria.setIdUsuario(usr);
         
         Endereco endereco = new Endereco();
         endereco.setLogradouro(this.getLogradouro());
@@ -82,12 +79,15 @@ public class ConcessionariaBean implements Serializable {
         endereco.setLongitude(0.0f);
         
         concessionaria.setIdEndereco(endereco);
-        concessionaria.setIdAdmConcessionaria(admConcessionaria);
         concessionaria.setCnpj(getCnpj());
         concessionaria.setNome(getNomeConcessionaria());
         concessionaria.setSite(getSite());
         
-        this.getConcessionariaServico().salvar(concessionaria);
+        admConcessionaria.setConcessionaria(concessionaria);
+             
+        this.getAdmConcessionariaServico().salvar(admConcessionaria);
+        
+        
         
             
         } 
@@ -98,19 +98,7 @@ public class ConcessionariaBean implements Serializable {
         return "login.xhtml";
     }
 
-    /**
-     * @return the concessionariaServico
-     */
-    public ConcessionariaServico getConcessionariaServico() {
-        return concessionariaServico;
-    }
-
-    /**
-     * @param concessionariaServico the concessionariaServico to set
-     */
-    public void setConcessionariaServico(ConcessionariaServico concessionariaServico) {
-        this.concessionariaServico = concessionariaServico;
-    }
+  
 
     /**
      * @return the usuarioServico
@@ -320,6 +308,20 @@ public class ConcessionariaBean implements Serializable {
      */
     public void setSite(String site) {
         this.site = site;
+    }
+
+    /**
+     * @return the AdmConcessionariaServico
+     */
+    public AdmConcessionariaServico getAdmConcessionariaServico() {
+        return AdmConcessionariaServico;
+    }
+
+    /**
+     * @param AdmConcessionariaServico the AdmConcessionariaServico to set
+     */
+    public void setAdmConcessionariaServico(AdmConcessionariaServico AdmConcessionariaServico) {
+        this.AdmConcessionariaServico = AdmConcessionariaServico;
     }
 
 }

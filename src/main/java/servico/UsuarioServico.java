@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import modelo.Usuario;
 
 /**
@@ -30,9 +29,6 @@ public class UsuarioServico {
     public UsuarioServico() {
     }
 
-    public void salvar(Usuario usuario) {
-        em.persist(usuario);
-    }
 
     public Usuario buscarPessoa(String login, String senha) {
         Usuario usuario = null;

@@ -6,11 +6,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 import modelo.Automovel;
 import modelo.Cliente;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-31T10:50:45")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-04T18:27:42")
 @StaticMetamodel(Avaliacao.class)
 public class Avaliacao_ { 
 
-    public static volatile SingularAttribute<Avaliacao, Cliente> idCliente;
+    public static volatile SingularAttribute<Avaliacao, Cliente> cliente;
     public static volatile SingularAttribute<Avaliacao, Automovel> idAutomovel;
     public static volatile SingularAttribute<Avaliacao, Integer> idAvaliacao;
     public static volatile SingularAttribute<Avaliacao, String> comentario;

@@ -18,7 +18,6 @@ import modelo.Cliente;
 import modelo.Endereco;
 import modelo.Usuario;
 import servico.ClienteServico;
-import servico.EnderecoServico;
 import servico.UsuarioServico;
 
 /**
@@ -63,15 +62,13 @@ public class ClienteBean implements Serializable {
     public String salvar() {
 
         try {
-             Usuario usr = new Usuario();
              Cliente cliente = new Cliente();
         
-        usr.setNome(this.nome);
-        usr.setEmail(this.email);
-        usr.setLogin(this.login);
-        usr.setSenha(this.senha);
+        cliente.setNome(this.nome);
+        cliente.setEmail(this.email);
+        cliente.setLogin(this.login);
+        cliente.setSenha(this.senha);
         
-        this.getUsuarioServico().salvar(usr);
         
         Endereco endereco = new Endereco();
         endereco.setLogradouro(this.logradouro);
@@ -85,10 +82,10 @@ public class ClienteBean implements Serializable {
         endereco.setLongitude(0.0f);
         
         cliente.setIdEndereco(endereco);
-        cliente.setIdUsuario(usr);
         this.getClienteServico().salvar(cliente);
         
-            
+        
+
         } 
         catch (EJBException ex) {
             ex.printStackTrace();
