@@ -5,7 +5,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 import modelo.AdmConcessionaria;
+import modelo.Concessionaria;
+import modelo.Usuario;
 
 /**
  *
@@ -21,5 +24,20 @@ public class AdmConcessionariaServico {
 
     public void salvar(AdmConcessionaria admConcessionaria) {
         em.persist(admConcessionaria);
+    }
+    
+    public Concessionaria getConcessionariaUsuario(Integer idUsuario)
+    {
+        Concessionaria c = null;
+        
+        System.out.println("Usr = "+idUsuario);
+        
+        Query q = this.em.createQuery("SELECT a.Concessionaria FROM AdmConcessionaria a WHERE a.idUsuario = :idUsuario");
+        
+        q.setParameter("idUsuario", idUsuario);
+        c = (Concessionaria) q.getSingleResult();
+        
+        return c;
+        
     }
 }

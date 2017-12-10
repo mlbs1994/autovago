@@ -82,7 +82,7 @@ body
 }
 
 
-#ofertasLabel
+#ofertasLabel, #minhasOfertasLabel
 {
     font-size: 22pt;
     font-family: Tahoma;
@@ -179,3 +179,31 @@ body
 {
     border-style: none !important
 }
+
+#basic_header
+{
+    height: 20px;
+}
+
+#formCadastrarOferta, #formCadastrarAutomovel, #formCadastrarCategoria
+{
+    padding-left: 15%;
+}
+
+.customTitleBar > .ui-panel-titlebar {
+    background: #BBBBBB;
+    margin: 0px;
+    font-weight: bold;
+    text-align: center;
+    font-family: Arial ;
+    }
+    
+    #tabelaAutomoveis, #tabelaFabricantes, #tabelaCategorias
+    {
+        padding-bottom: 50px;
+    }
+    
+    #minhasOfertasTable .textoColuna
+    {
+        font-size: 8pt;
+    }

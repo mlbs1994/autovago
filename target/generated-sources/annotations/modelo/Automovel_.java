@@ -10,7 +10,7 @@ import modelo.Fabricante;
 import modelo.Imagem;
 import modelo.Oferta;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-11-04T18:27:42")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-12-08T12:33:53")
 @StaticMetamodel(Automovel.class)
 public class Automovel_ { 
 
@@ -22,6 +22,8 @@ public class Automovel_ {
     public static volatile ListAttribute<Automovel, Oferta> ofertaList;
     public static volatile ListAttribute<Automovel, Avaliacao> avaliacaoList;
     public static volatile SingularAttribute<Automovel, Categoria> idCategoria;
+    public static volatile SingularAttribute<Automovel, String> imgSrc;
     public static volatile SingularAttribute<Automovel, String> nomeModelo;
+    public static volatile SingularAttribute<Automovel, String> descricao;
 
 }

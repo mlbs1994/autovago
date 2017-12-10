@@ -143,17 +143,18 @@
             <h:outputLabel id="ofertasLabel" style="font-family: Helvetica;">OFERTAS</h:outputLabel>
             
             <div class="ui-g" id="ofertasLista">
+                <ui:repeat var="automovel" value="#{automovelBean.automoveis}">
                 <div class="ui-g-6 listaCell">
                     <h:panelGrid columns="2" style="border: none;">
                          <h:graphicImage class="imgCarro" style="width:255px; height: 180px; margin: 0px; padding: 0px;" 
-                                         library="imgs" name="gol2017.jpg" /> 
+                                         library="imgs" name="#{automovel.imgSrc}" /> 
                          <h:panelGrid id="descrCarro" style="font-size: 13pt; padding-left: 10px;
                                       font-weight: bold;">
-                             <h:outputLabel class="modeloCarro">Volkswagen Gol 2017</h:outputLabel>
+                             <h:outputLabel class="modeloCarro">#{automovel.idFabricante.nome} #{automovel.nomeModelo} #{automovel.ano}</h:outputLabel>
                              <h:graphicImage class="starRating" style="width:140px; height: 20px; margin: 0px; padding: 0px;" 
-                                         library="imgs" name="star-rating-4.jpg" />  
+                                             library="imgs" name="star-rating-#{oferta.idAutomovel.numEstrelas}.jpg" />  
                              <p:outputPanel style=" margin-top: 25px; margin-bottom: 25px; font-size: 9pt; font-weight: normal;">
-                                 Carro ótimo com direção hidraúlica
+                                 #{automovel.descricao}
                              </p:outputPanel>
                              <span class="rating" style="height: 50px; width: 50px; background-color: green;
                                    color: white; margin-top: 20px; padding: 5px; border-radius: 5px;">95</span>
@@ -162,27 +163,31 @@
                     </h:panelGrid>
                 </div>
                 <div class="ui-g-2 listaCell">
-                    <div class="nomeConcessionaria" 
-                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTONET</div>
-                    <div class="ofertaCarroConcessionaria" 
-                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 17.000,500</div>
-                     <div class="nomeConcessionaria" 
-                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTOMART</div>
-                    <div class="ofertaCarroConcessionaria" 
-                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 19.500,500</div>
-                          <div class="nomeConcessionaria" 
-                         style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">AUTORODAS</div>
-                    <div class="ofertaCarroConcessionaria" 
-                         style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">R$ 21.100,900</div>   
+                    <ui:repeat var="ofertas" value="#{automovelBean.ofertasAutomovel}">
+                        <div class="nomeConcessionaria" 
+                             style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;">#{ofertas.idConcessionaria.nome}
+                        </div>
+                        <div class="ofertaCarroConcessionaria" 
+                            style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">
+                            <h:outputText value="#{oferta.preco}">
+                                    <f:convertNumber type="currency" currencySymbol="R$" />
+                            </h:outputText>
+                        </div>
+                    </ui:repeat>
                 </div>
                 <div class="ui-g-3 listaCell">
                      <div class="nomeConcessionariaMelhorOferta" 
                          style="font-size: 20pt; text-align: center; padding: 5px; padding-top: 50px; font-weight: bold;">AUTONET</div>
                      <div class="ofertaCarroConcessionaria" 
-                         style="font-size: 15pt; text-align: center;padding: 5px; margin-bottom: 15px; color: #0a0; font-weight: bold;">R$ 17.000,500</div>
+                         style="font-size: 15pt; text-align: center;padding: 5px; margin-bottom: 15px; color: #0a0; font-weight: bold;">
+                        <h:outputText value="#{oferta.preco}">
+                                <f:convertNumber type="currency" currencySymbol="R$" />
+                        </h:outputText>
+                     </div>
                      <p:commandButton value="Ver Oferta" action="login.xhtml" id="btn_verOferta" 
                                       style=" width: 100px; height: 30px; background-color: #0a0; color:#fff; display: block; margin: auto; margin-top: 40px;"/>   
                 </div>
+                </ui:repeat>
             </div>
         </ui:define>
     </ui:composition>

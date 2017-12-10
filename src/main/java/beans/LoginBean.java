@@ -7,6 +7,7 @@ package beans;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import servico.UsuarioServico;
 
+@ManagedBean(name="loginBean")
 public class LoginBean implements Serializable {
 
     @EJB
@@ -29,13 +31,26 @@ public class LoginBean implements Serializable {
 
     public String efetuarLogin() {
         Usuario usuario = UsuarioServico.buscarPessoa(username, senha);
+        String homepage="";
         if (usuario == null) {
             return "/login";
 
         } else {
             this.usuarioLogado = usuario;
-            return "/home?faces-redirect=true";
+            
+            /*if(this.usuarioLogado.getDecriminatorValue()=="C")
+            {
+                homepage =  "/home?faces-redirect=true";
+            }
+            if(this.usuarioLogado.getDecriminatorValue()=="A")
+            {
+                 homepage =  "/homeConcessionaria?faces-redirect=true";
+            }*/
+            
         }
+       
+        System.out.println("homepage = "+homepage);
+        return "/home?faces-redirect=true";
 
     }
     

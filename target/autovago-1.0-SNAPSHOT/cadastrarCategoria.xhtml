@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloPrincipal.xhtml">
+
+           <ui:define name="left">
+                <h:form>
+                    <ul type="none">
+                        <li><h:link id="homeAdmLink" outcome="cadastrarAutomovel.xhtml?faces-redirect=true">Automóveis</h:link></li>
+                        <li><h:link id="cadFabLink" outcome="cadastrarFabricante.xhtml?faces-redirect=true">Fabricantes</h:link></li>
+                        <li><h:link id="cadCtgLink" outcome="cadastrarCategoria.xhtml?faces-redirect=true">Categorias</h:link></li>
+                        <li><h:commandLink  id="logoutLinkC" action="#{logoutBean.logout()}">Logout</h:commandLink></li>
+                    </ul>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="formCadastrarCategoria">
+                    <p:panel id="basic" header="Cadastrar Categoria" styleClass="customTitleBar" 
+                         style="margin-bottom:50px; width: 550px; height: 140px; display: block; 
+                          margin-top: 20px; ">
+                           
+                    <h:form>
+                        <h:panelGrid columns="1">
+                            <h:panelGrid columns="2" cellpadding="5"> 
+                                
+                                <h:outputText class="labelFields" value="Categoria" />
+                                <p:inputText id="nomeField" size="50" value="#{categoriaBean.nomeCategoria}">
+                                </p:inputText>
+                                
+                                <p:commandButton value="Cadastrar" action="#{categoriaBean.salvar()}" id="btn_cadastrarCtg" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
+                                
+                                
+                            </h:panelGrid>
+                        </h:panelGrid>    
+                    </h:form>    
+                </p:panel>  
+                </div>  
+                <div id="tabelaCategorias">
+                    <p:dataTable var="categoria" value="#{categoriaBean.categorias}">
+                        <p:column headerText="Categoria">
+                            <h:outputText value="#{categoria.nome}" />
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

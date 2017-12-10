@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloPrincipal.xhtml">
+
+            <ui:define name="top">
+                <div class="ui-g">
+                    <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username">#{loginBean.username}</span></h:outputLabel>
+                    <h:graphicImage id="logo" class="ui-g-4" library="imgs" name="logo1.png" 
+                                    style="height: 100px; "/>
+                    <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 240px !important;" id="formLogout">
+                        <h:panelGrid columns="2">
+                            <h:link  id="alterarContaLink" style="color: darkblue !important; padding-right: 20px; " outcome="detalhesConta.xhtml?faces-redirect=true">
+                                Minha conta
+                            </h:link>
+                            <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
+                                Logout
+                            </h:commandLink>
+                        </h:panelGrid>    
+                    </h:form>
+
+                    <!--<h:link id="logoutLink" style="font-size:  10pt !important;
+                                                 padding-top: 40px !important; padding-left: 300px !important;
+                                                 color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
+                </div> 
+            </ui:define>
+            
+            <ui:define name="left">
+                 <h:form>
+                    <ul type="none">
+                        <li><h:link id="homeAdmLink" outcome="cadastrarAutomovel.xhtml?faces-redirect=true">Automóveis</h:link></li>
+                        <li><h:link id="cadFabLink" outcome="cadastrarFabricante.xhtml?faces-redirect=true">Fabricantes</h:link></li>
+                        <li><h:link id="cadCtgLink" outcome="cadastrarCategoria.xhtml?faces-redirect=true">Categorias</h:link></li>
+                    </ul>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="formCadastrarAutomovel">
+                    <p:panel id="basic" header="Cadastrar Automovel" styleClass="customTitleBar" 
+                         style="margin-bottom:50px; width: 550px; height: 530px; display: block; 
+                          margin-top: 20px; ">
+                        <h:form id="formularioCadastrarAutomovel" enctype="multipart/form-data">        
+                       <h:panelGrid columns="1">
+                            <h:panelGrid columns="2" cellpadding="5"> 
+                                
+                                <h:outputText class="labelFields" value="Categoria" />
+                                <p:selectOneMenu id="CategoriaAutomovel" value="#{automovelBean.categoria}" style="width:120px; font-size: 8pt;">
+                                    <f:selectItem itemLabel="Selecione" itemValue="#{ctg}" />
+                                    <f:selectItems value="#{automovelBean.categorias}" var="ctg" 
+                                                   itemValue="#{ctg}" itemLabel="#{ctg.nome}" />
+                                    <f:converter converterId="categoriaConverter" />
+                                </p:selectOneMenu>
+                                
+                                <h:outputText class="labelFields" value="Fabricante" />
+                                <p:selectOneMenu id="FabricanteAutomovel" value="#{automovelBean.fabricante}" style="width:120px; font-size: 8pt;">
+                                    <f:selectItem itemLabel="Selecione" itemValue="#{fab}" />
+                                    <f:selectItems value="#{automovelBean.fabricantes}" var="fab" 
+                                                   itemValue="#{fab}" itemLabel="#{fab.nome}" />
+                                    <f:converter converterId="fabricanteConverter" />
+                                </p:selectOneMenu>
+
+                                <h:outputText class="labelFields" value="Modelo" />
+                                <p:inputText id="nomeField" size="50" value="#{automovelBean.modelo}">
+                                </p:inputText>
+                                
+                                <h:outputText class="labelFields" value="Descrição" />
+                                <p:inputTextarea id="descrAutomovelField" rows="10" cols="50" value="#{automovelBean.descricao}">
+                                </p:inputTextarea>
+                                
+                                <h:outputText class="labelFields" value="Ano" />
+                                <p:inputText id="anoField" size="50" value="#{automovelBean.ano}">
+                                </p:inputText>
+                                                   
+                               
+                                <h:outputText class="labelFields" value="Estrelas" />
+                                <p:rating value="#{automovelBean.numEstrelas}" style="width: 200px;" />
+                                
+                                <h:outputText class="labelFields" value="Foto" />
+                                <p:fileUpload id="imagemFieldAuto" fileUploadListener="#{automovelBean.uploadAction}"                                              label="Selecione" auto="true" sizeLimit="10000000" 
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" mode="advanced" />
+                                                 
+                                <p:commandButton value="Cadastrar" action="#{automovelBean.salvar()}" id="btn_cadastrarAutomovel" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff"/>
+                                
+                            </h:panelGrid>
+                        </h:panelGrid>    
+                        </h:form>
+                       </p:panel>
+                    
+                 
+                </div>  
+                <div id="tabelaAutomoveis">
+                    <h:form>
+                    <p:dataTable var="automovel" value="#{automovelBean.automoveis}">
+                        <p:column headerText="Modelo">
+                            <h:outputText value="#{automovel.nomeModelo}" />
+                        </p:column>
+
+                        <p:column headerText="Fabricante">
+                            <h:outputText value="#{automovel.idFabricante.nome}" />
+                        </p:column>
+
+                        <p:column headerText="Categoria">
+                            <h:outputText value="#{automovel.idCategoria.nome}" />
+                        </p:column>
+
+                        <p:column headerText="Ano">
+                            <h:outputText value="#{automovel.ano}" />
+                        </p:column>
+                        
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{automovel.descricao}" />
+                        </p:column>
+                        
+                        <p:column headerText="Estrelas">
+                            <h:outputText value="#{automovel.numEstrelas}" />
+                        </p:column>
+                        
+                        <p:column class='textoColuna' headerText="Foto">
+                            <h:graphicImage class="imgCarroOferta" style="width:80px; height: 50px; margin: 0px; padding: 0px;" 
+                                            library="imgs" name="#{automovel.imgSrc}" /> 
+                        </p:column>
+                        
+                       <!-- <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>-->
+                    </p:dataTable>
+                  </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

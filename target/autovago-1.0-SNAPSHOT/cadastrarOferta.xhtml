@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloPrincipal.xhtml">
+
+           
+            <ui:define name="top">
+                <div class="ui-g">
+                <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username">#{loginBean.username}</span></h:outputLabel>
+                <h:graphicImage id="logo" class="ui-g-4" library="imgs" name="logo1.png" 
+                                style="height: 100px; "/>
+                <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 240px !important;" id="formLogout">
+                    <h:panelGrid columns="2">
+                        <h:link  id="alterarContaLink" style="color: darkblue !important; padding-right: 20px; " outcome="detalhesConta.xhtml?faces-redirect=true">
+                            Minha conta
+                        </h:link>
+                        <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
+                            Logout
+                        </h:commandLink>
+                    </h:panelGrid>    
+                </h:form>
+                
+                <!--<h:link id="logoutLink" style="font-size:  10pt !important;
+                                             padding-top: 40px !important; padding-left: 300px !important;
+                                             color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
+            </div> 
+            </ui:define>
+
+            <ui:define name="left">
+                <h:form>
+                    <ul type="none">
+                        <li><h:link outcome="cadastrarOferta.xhtml?faces-redirect=true">Fazer Oferta</h:link></li>
+                        <li><h:link outcome="minhasOfertas.xhtml?faces-redirect=true">Consultar minhas ofertas</h:link></li>
+                        <li><h:link outcome="cadastrarOferta.xhtml?faces-redirect=true">Editar Ofertas</h:link></li>
+                    </ul>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="formCadastrarOferta">
+                    <p:panel id="basic" header="Cadastrar Oferta" styleClass="customTitleBar" 
+                         style="margin-bottom:50px; width: 550px; height: 660px; display: block; 
+                          margin-top: 20px; ">
+                           
+                    <h:form >
+                        <h:panelGrid columns="1">
+                            <h:panelGrid columns="2" cellpadding="5"> 
+
+                                <h:outputText class="labelFields" value="Automóvel" />
+                                <p:selectOneMenu id="OfertaeAutomovel" value="#{ofertaBean.automovel}" style="width:120px; font-size: 8pt;">
+                                    <f:selectItem itemLabel="Selecione" itemValue="#{auto}" />
+                                    <f:selectItems value="#{ofertaBean.listaAutomoveis}" var="auto" 
+                                                   itemValue="#{auto}" itemLabel="#{auto.nomeModelo}" />
+                                    <f:converter converterId="automovelConverter" />
+                                </p:selectOneMenu>
+
+                                <h:outputText class="labelFields" value="Descricao" />
+                                <p:inputTextarea id="descrOfertaField" rows="10" cols="50" value="#{ofertaBean.descricao}">
+                                </p:inputTextarea>
+                                
+                                <h:outputText class="labelFields" value="Cor" />
+                                <p:inputText id="corAutomovelOferta" size="20" value="#{ofertaBean.cor}"  />
+                                
+                                <h:outputText class="labelFields" value="Preço" />
+                                <p:inputNumber id="precoAutomovelOferta" size="20" value="#{ofertaBean.preco}"  />
+                                
+                                <h:outputText class="labelFields" value="Zero Km" />
+                                <p:selectBooleanCheckbox id="ehZeroKmInput" value="#{ofertaBean.ehZeroKm}" />
+                                
+                                <h:outputText class="labelFields" value="Automatico" />
+                                <p:selectBooleanCheckbox id="ehAutomaticoInput" value="#{ofertaBean.ehAutomatico}" />
+                                
+                                <h:outputText class="labelFields" value="4 Portas" />
+                                <p:selectBooleanCheckbox id="eh4PortasInput" value="#{ofertaBean.eh4Portas}" />
+                                
+                                <h:outputText class="labelFields" value="Direção Hidraúlica" />
+                                <p:selectBooleanCheckbox id="ehDirecaoHidraulicaInput" value="#{ofertaBean.ehDirecaoHidraulica}" />
+                                
+                                <h:outputText class="labelFields" value="Computador de Bordo" />
+                                <p:selectBooleanCheckbox id="temComputadorBordoInput" value="#{ofertaBean.temComputadorBordo}" />
+                                
+                                <h:outputText class="labelFields" value="Sistema Antiroubo" />
+                                <p:selectBooleanCheckbox id="temSistemaAntirouboInput" value="#{ofertaBean.temSistemaAntiRoubo}" />
+                                
+                                <p:commandButton value="Cadastrar" action="#{ofertaBean.salvar()}" id="btn_logar" style=" width: 100px; height: 30px; background-color: darkblue; color:#fff">
+                                    <f:param name="idUsuario" value="#{loginBean.usuarioLogado.idUsuario}" />
+                                </p:commandButton> 
+                           
+                            </h:panelGrid>
+                        </h:panelGrid>    
+                    </h:form>    
+                </p:panel>  
+                </div>     
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

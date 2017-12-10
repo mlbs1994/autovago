@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloPrincipal.xhtml">
+
+           
+            <ui:define name="top">
+                <div class="ui-g">
+                <h:outputLabel id="boasVindas" class="ui-g-4">Bem Vindo <span id="username">#{loginBean.username}</span></h:outputLabel>
+                <h:graphicImage id="logo" class="ui-g-4" library="imgs" name="logo1.png" 
+                                style="height: 100px; "/>
+                <h:form class="ui-g-4" style="font-size:  10pt !important; padding-top: 40px !important; padding-left: 240px !important;" id="formLogout">
+                    <h:panelGrid columns="2">
+                        <h:link  id="alterarContaLink" style="color: darkblue !important; padding-right: 20px; " outcome="detalhesConta.xhtml?faces-redirect=true">
+                            Minha conta
+                        </h:link>
+                        <h:commandLink  id="logoutLink" style="color: darkblue !important;" action="#{logoutBean.logout()}">
+                            Logout
+                        </h:commandLink>
+                    </h:panelGrid>    
+                </h:form>
+                
+                <!--<h:link id="logoutLink" style="font-size:  10pt !important;
+                                             padding-top: 40px !important; padding-left: 300px !important;
+                                             color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
+            </div> 
+            </ui:define>
+
+            <ui:define name="left">
+                <h:form>
+                    <ul type="none">
+                        <li><h:link outcome="cadastrarOferta.xhtml?faces-redirect=true">Fazer Oferta</h:link></li>
+                        <li><h:link outcome="minhasOfertas.xhtml?faces-redirect=true">Consultar minhas ofertas</h:link></li>
+                        <li><h:link outcome="cadastrarOferta.xhtml?faces-redirect=true">Editar Ofertas</h:link></li>
+                    </ul>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:outputLabel id="minhasOfertasLabel" style="font-family: Helvetica;">MINHAS OFERTAS</h:outputLabel>
+                
+                <p:dataTable id='minhasOfertasTable' var="oferta" value="#{ofertaBean.minhasOfertas}" style="margin-bottom: 50px; margin-top: 45px; ">
+                        <p:column class='textoColuna' headerText="Automóvel">
+                            <h:outputText value="#{oferta.idAutomovel.idFabricante.nome} #{oferta.idAutomovel.nomeModelo} #{oferta.idAutomovel.ano}" />
+                        </p:column>
+
+                        <p:column class='textoColuna' headerText="Descrição">
+                            <h:outputText value="#{oferta.descricao}" />
+                        </p:column>
+
+                        <p:column class='textoColuna' headerText="Cor">
+                            <h:outputText value="#{oferta.cor}" />
+                        </p:column>
+
+                        <p:column class='textoColuna' headerText="Preço">
+                            <h:outputText value="#{oferta.preco}" />
+                        </p:column>
+                        
+                        <p:column class='textoColuna' headerText="0Km">
+                            <h:outputText value="#{oferta.ehZeroKm}" />
+                        </p:column>
+                    
+                        <p:column class='textoColuna' headerText="A">
+                            <h:outputText value="#{oferta.ehAutomatico}" />
+                        </p:column>
+                    
+                        <p:column class='textoColuna' headerText="4P">
+                            <h:outputText value="#{oferta.eh4Portas}" />
+                        </p:column>
+                    
+                        <p:column class='textoColuna' headerText="DH">
+                            <h:outputText value="#{oferta.ehDirecaoHidraulica}" />
+                        </p:column>
+                    
+                        <p:column class='textoColuna' headerText="CB">
+                            <h:outputText value="#{oferta.temComputadorBordo}" />
+                        </p:column>
+                    
+                        <p:column class='textoColuna' headerText="SAR">
+                            <h:outputText value="#{oferta.temSistemaAntiRoubo}" />
+                        </p:column>
+                    
+                       
+                    </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

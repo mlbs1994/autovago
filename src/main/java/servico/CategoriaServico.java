@@ -40,5 +40,14 @@ public class CategoriaServico
         
         return listaCategorias;
     }
+
+    public void salvar(Categoria categoria)
+    {
+        this.em.persist(categoria);
+    }
+
+    public Categoria getCategoria(int idCategoria) {
+        return this.em.find(Categoria.class, idCategoria);
+    }
  
 }

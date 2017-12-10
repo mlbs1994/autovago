@@ -37,4 +37,14 @@ public class FabricanteServico
         return listaFabricantes;
     }
     
+    public void salvar(Fabricante fabricante)
+    {
+        this.em.persist(fabricante);
+    }
+
+    public Fabricante getFabricante(int idFabricante) {
+        
+        return this.em.find(Fabricante.class, idFabricante);
+        
+    }
 }

@@ -18,4 +18,29 @@
         <managed-bean-class>beans.LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>fabricanteBean</managed-bean-name>
+        <managed-bean-class>beans.FabricanteBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>categoriaBean</managed-bean-name>
+        <managed-bean-class>beans.CategoriaBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>automovelBean</managed-bean-name>
+        <managed-bean-class>beans.AutomovelBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ofertaBean</managed-bean-name>
+        <managed-bean-class>beans.OfertaBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>fileUploadBean</managed-bean-name>
+        <managed-bean-class>beans.FileUploadBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

@@ -56,8 +56,17 @@ public class Automovel implements Serializable {
     private int ano;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 400)
+    @Column(name = "descricao")
+    private String descricao;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "numEstrelas")
     private int numEstrelas;
+    @Basic(optional = false)
+    @Size(min = 1, max = 400)
+    @Column(name = "imgSrc")
+    private String imgSrc;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne(optional = false)
     private Categoria idCategoria;
@@ -109,6 +118,16 @@ public class Automovel implements Serializable {
         this.ano = ano;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
+    
+
     public int getNumEstrelas() {
         return numEstrelas;
     }
@@ -117,6 +136,14 @@ public class Automovel implements Serializable {
         this.numEstrelas = numEstrelas;
     }
 
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+    
     public Categoria getIdCategoria() {
         return idCategoria;
     }

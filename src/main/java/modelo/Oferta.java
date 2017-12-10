@@ -91,7 +91,7 @@ public class Oferta implements Serializable {
     @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
     @ManyToOne(optional = false)
     private Concessionaria idConcessionaria;
-
+    
     public Oferta() {
     }
 
