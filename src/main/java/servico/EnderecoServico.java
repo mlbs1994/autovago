@@ -36,4 +36,8 @@ public class EnderecoServico {
     {
         return this.em.find(Endereco.class, id);
     }
+
+    public void alterarDadosEndereco(Endereco idEndereco) {
+        this.em.merge(idEndereco);
+    }
 }

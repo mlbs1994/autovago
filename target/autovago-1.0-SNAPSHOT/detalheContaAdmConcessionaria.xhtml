@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./modeloAlterarCadastro.xhtml">
+
+            
+           <ui:define name="content">
+                <div id="conteudoCadastro">
+                    <p:panel id="basic" header="Dados da Concessionária" styleClass="customTitleBar" 
+                             style="margin-bottom:50px; width: 683px; height: 640px; display: block; 
+                             margin-left: auto;  margin-right: auto; margin-top: 0px; ">
+
+                        <h:form >
+                            <h:panelGrid columns="1">
+                                <h:panelGrid columns="2" cellpadding="5"> 
+
+                                    <h:outputText class="labelFields" value="CNPJ" />
+                                    <p:inputText id="cnpj" size="30" value="#{loginBean.admConcessionariaLogado.concessionaria.cnpj}">
+                                    </p:inputText>
+
+                                    <h:outputText class="labelFields" value="Nome da Concessionária" />
+                                    <p:inputText id="nomeConcessionaria" size="30" value="#{loginBean.admConcessionariaLogado.concessionaria.nome}">
+                                    </p:inputText>
+
+                                    <h:outputText class="labelFields" value="Site" />
+                                    <p:inputText id="site" size="40" value="#{loginBean.admConcessionariaLogado.concessionaria.site}">
+                                    </p:inputText>
+                                    
+                                </h:panelGrid>
+                                
+                                <div class="fieldGroup" style="text-align: center; background-color: #BBBBBB; font-family: Arial; 
+                                    font-size: 13.2px; color: #333333; font-weight: 700; 
+                                    text-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px;
+                                    padding: 5px;
+                                    border-radius: 3px;
+                                    margin-left: -16px;
+                                    margin-right: -51px;" >
+                                       Endereço
+                               </div>
+                                
+                                <h:panelGrid columns="2">
+
+                                    <h:outputText class="labelFields" value="Logradouro: " />
+                                    <p:inputText id="logConcessionaria" size="40" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.logradouro}"  />
+
+                                    <h:outputText class="labelFields" value="Número: " />
+                                    <p:inputText id="numConcessionaria" size="10"  value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.numero}"/>
+
+                                    <h:outputText class="labelFields" value="Complemento: "  />
+                                    <p:inputText id="compConcessionaria" size="15" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.complemento}"/>
+
+                                    <h:outputText class="labelFields" value="Bairro: " />
+                                    <p:inputText id="bairroConcessionaria" size="30" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.bairro}"  />
+
+                                    <h:outputText class="labelFields" value="Cidade: " />
+                                    <p:inputText id="cidadeConcessionaria" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.cidade}" />
+
+                                    <h:outputText class="labelFields" value="Estado: " />
+                                    <p:selectOneMenu id="estadoConcessionaria"  style="width:85px" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.estado}">
+                                        <f:selectItem itemLabel="AC" itemValue="Acre" />
+                                        <f:selectItem itemLabel="AL" itemValue="Alagoas" />
+                                        <f:selectItem itemLabel="AP" itemValue="Amapá" />
+                                        <f:selectItem itemLabel="AM" itemValue="Amazonas" />
+                                        <f:selectItem itemLabel="BA" itemValue="Bahia" />
+                                        <f:selectItem itemLabel="CE" itemValue="Ceará" />
+                                        <f:selectItem itemLabel="DF" itemValue="Distrito Federal" />
+                                        <f:selectItem itemLabel="ES" itemValue="Espirito Santo" />
+                                        <f:selectItem itemLabel="GO" itemValue="Goiás"/>
+                                        <f:selectItem itemLabel="MA" itemValue="Maranhão" />
+                                        <f:selectItem itemLabel="MT" itemValue="Mato Grosso" />
+                                        <f:selectItem itemLabel="MS" itemValue="Mato Grosso do Sul" />
+                                        <f:selectItem itemLabel="MG" itemValue="Minas Gerais" />
+                                        <f:selectItem itemLabel="PA" itemValue="Pará" />
+                                        <f:selectItem itemLabel="PB" itemValue="Paraíba" />
+                                        <f:selectItem itemLabel="PR" itemValue="Paraná" />
+                                        <f:selectItem itemLabel="PE" itemValue="Pernambuco" />
+                                        <f:selectItem itemLabel="PI" itemValue="Piauí" />
+                                        <f:selectItem itemLabel="RJ" itemValue="Rio de Janeiro" />
+                                        <f:selectItem itemLabel="RN" itemValue="Rio Grande do Norte" />
+                                        <f:selectItem itemLabel="RS" itemValue="Rio Grande do Sul" />
+                                        <f:selectItem itemLabel="RO" itemValue="Rondonia" />
+                                        <f:selectItem itemLabel="RR" itemValue="Roraima" />
+                                        <f:selectItem itemLabel="SC" itemValue="Santa Catarina" />
+                                        <f:selectItem itemLabel="SP" itemValue="São Paulo" />
+                                        <f:selectItem itemLabel="SE" itemValue="Sergipe" />
+                                        <f:selectItem itemLabel="TO" itemValue="Tocantins" />
+                                    </p:selectOneMenu>
+
+                                    <h:outputText class="labelFields" value="CEP: " />
+                                    <p:inputText id="cepConcessionaria" value="#{loginBean.admConcessionariaLogado.concessionaria.idEndereco.cep}" />
+
+                                </h:panelGrid>
+                                
+                                <div class="fieldGroup" style="text-align: center; background-color: #BBBBBB; font-family: Arial; 
+                                    font-size: 13.2px; color: #333333; font-weight: 700; 
+                                    text-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px;
+                                    padding: 5px;
+                                    border-radius: 3px;
+                                    margin-left: -16px;
+                                    margin-right: -51px;" >
+                                       Dados de Acesso a Conta
+                               </div>
+                                
+                                <h:panelGrid columns="2">
+                                    
+                                    <h:outputText class="labelFields" value="Nome Administrador" />
+                                    <p:inputText id="nomeAdmConcessionaria" size="40" value="#{loginBean.admConcessionariaLogado.nome}">
+                                    </p:inputText>
+
+                                    <h:outputText class="labelFields" value="Email Administrador" />
+                                    <p:inputText id="emailAdmConcessionaria" size="40" value="#{loginBean.admConcessionariaLogado.email}">
+                                    </p:inputText>
+
+                                    <h:outputText class="labelFields" value="Login Administrador: " />
+                                    <p:inputText id="loginAdmConcessionaria" size="20" value="#{loginBean.admConcessionariaLogado.login}"/>
+
+                                    <h:outputText class="labelFields" value="Senha: " />
+                                    <p:password id="senhaAdmConcessionaria" required="true" value="#{loginBean.admConcessionariaLogado.senha}" redisplay="true"/>
+
+                                    <h:outputText class="labelFields" value="Confirme a senha: " />
+                                    <p:password id="senhaAdmConcessionariaConfirm"  feedback="true" />
+
+                                    <h:panelGrid columns="3">
+                                        <p:commandButton value="Alterar dados" action="#{loginBean.alterarDadosCadastrais()}" id="btn_alterarDadosCadastraisAdm" style=" width: 120px; height: 30px; background-color: darkblue; color:#fff"/>
+                                        <p:commandButton value="Excluir Conta" action="#{loginBean.excluirUsuario()}" id="btn_excluirContaAdm" style=" width: 120px; height: 30px; background-color: darkred; color:#fff"/>
+                                        <h:link outcome="home.xhtml?faces-redirect=true">Voltar</h:link>   
+                                    </h:panelGrid>
+                                      
+
+                                </h:panelGrid>
+                            </h:panelGrid>    
+                        </h:form>    
+                    </p:panel>
+                </div>    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -22,11 +22,11 @@
                             <h:panelGrid columns="2" cellpadding="5"> 
 
                                 <h:outputText class="labelFields" value="Nome" />
-                                <p:inputText id="nomeField" size="50" value="#{clienteBean.usuarioLogado.nome}">
+                                <p:inputText id="nomeField" size="50" value="#{loginBean.clienteLogado.nome}">
                                 </p:inputText>
 
                                 <h:outputText class="labelFields" value="Email" />
-                                <p:inputText id="emailField" size="50" value="#{clienteBean.usuarioLogado.email}">
+                                <p:inputText id="emailField" size="50" value="#{loginBean.clienteLogado.email}">
                                 </p:inputText>
 
                             </h:panelGrid>
@@ -44,22 +44,22 @@
                             <h:panelGrid columns="2" cellpadding="5"> 
 
                                 <h:outputText class="labelFields" value="Logradouro: " />
-                                <p:inputText id="logField" size="50" value="#{clienteBean.logradouro}"  />
+                                <p:inputText id="logField" size="50" value="#{loginBean.clienteLogado.idEndereco.logradouro}"  />
 
                                 <h:outputText class="labelFields" value="Número: " />
-                                <p:inputText id="numField" size="10"  value="#{clienteBean.logradouro}"/>
+                                <p:inputText id="numField" size="10"  value="#{loginBean.clienteLogado.idEndereco.numero}"/>
 
                                 <h:outputText class="labelFields" value="Complemento: "  />
-                                <p:inputText id="compField" size="15" value="#{clienteBean.complemento}"/>
+                                <p:inputText id="compField" size="15" value="#{loginBean.clienteLogado.idEndereco.complemento}"/>
 
                                 <h:outputText class="labelFields" value="Bairro: " />
-                                <p:inputText id="bairroField" size="30" value="#{clienteBean.bairro}"  />
+                                <p:inputText id="bairroField" size="30" value="#{loginBean.clienteLogado.idEndereco.bairro}"  />
 
                                 <h:outputText class="labelFields" value="Cidade: " />
-                                <p:inputText id="cidadeField" value="#{clienteBean.cidade}" />
+                                <p:inputText id="cidadeField" value="#{loginBean.clienteLogado.idEndereco.cidade}" />
 
                                 <h:outputText class="labelFields" value="Estado: " />
-                                <p:selectOneMenu id="estadoField"  style="width:85px" value="#{clienteBean.estado}">
+                                <p:selectOneMenu id="estadoField"  style="width:85px" value="#{loginBean.clienteLogado.idEndereco.estado}">
                                     <f:selectItem itemLabel="AC" itemValue="Acre" />
                                     <f:selectItem itemLabel="AL" itemValue="Alagoas" />
                                     <f:selectItem itemLabel="AP" itemValue="Amapá" />
@@ -90,7 +90,7 @@
                                 </p:selectOneMenu>
 
                                 <h:outputText class="labelFields" value="CEP: " />
-                                <p:inputText id="cepField" value="#{clienteBean.cep}" />
+                                <p:inputText id="cepField" value="#{loginBean.clienteLogado.idEndereco.cep}" />
 
                             </h:panelGrid>  
                             
@@ -105,10 +105,10 @@
                             </div>
                             <h:panelGrid columns="2" cellpadding="5"> 
                                 <h:outputText class="labelFields" value="Login: " />
-                                <p:inputText id="loginField" size="20" value="#{clienteBean.usuarioLogado.login}"/>
+                                <p:inputText id="loginField" size="20" value="#{loginBean.clienteLogado.login}"/>
 
                                 <h:outputText class="labelFields" value="Senha: " />
-                                <p:password id="senhaField" required="true" value="#{clienteBean.usuarioLogado.senha}"/>
+                                <p:password id="senhaField" required="true" value="#{loginBean.clienteLogado.senha}"/>
 
                                 <h:outputText class="labelFields" value="Confirme a senha: " />
                                 <p:password id="senhaFieldConfirm"  feedback="true" />
@@ -117,8 +117,8 @@
                             
                             <h:panelGrid columns="3">
 
-                                <p:commandButton value="Alterar dados" action="#{clienteBean.alterarDadosCadastrais()}" id="btn_alterarDadosCadastrais" style=" width: 120px; height: 30px; background-color: darkblue; color:#fff"/>
-                                <p:commandButton value="Excluir Conta" action="#{clienteBean.excluirContaUsuario()}" id="btn_excluirConta" style=" width: 120px; height: 30px; background-color: darkred; color:#fff"/>
+                                <p:commandButton value="Alterar dados" action="#{loginBean.alterarDadosCadastrais()}" id="btn_alterarDadosCadastrais" style=" width: 120px; height: 30px; background-color: darkblue; color:#fff"/>
+                                <p:commandButton value="Excluir Conta" action="#{loginBean.excluirUsuario()}" id="btn_excluirConta" style=" width: 120px; height: 30px; background-color: darkred; color:#fff"/>
                                 <h:link outcome="home.xhtml?faces-redirect=true">Voltar</h:link>   
                                 
 

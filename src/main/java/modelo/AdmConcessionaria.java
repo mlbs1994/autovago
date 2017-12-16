@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AdmConcessionaria extends Usuario implements Serializable {
     
     @JoinColumn(name = "idConcessionaria", referencedColumnName = "idConcessionaria")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Concessionaria Concessionaria;
 
     public AdmConcessionaria() {

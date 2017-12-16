@@ -30,4 +30,8 @@ public class ConcessionariaServico {
         em.persist(concessionaria);
     }
 
+    public void alterarDadosConcessionaria(Concessionaria concessionaria) {
+        this.em.merge(concessionaria);
+    }
+
 }

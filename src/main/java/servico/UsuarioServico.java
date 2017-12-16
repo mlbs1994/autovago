@@ -58,6 +58,9 @@ public class UsuarioServico {
     
     public void excluirConta(Usuario usr)
     {
+        if (!em.contains(usr)) {
+            usr = em.merge(usr);
+        }
         this.em.remove(usr);
     }
 }

@@ -35,7 +35,7 @@ public class Cliente extends Usuario implements Serializable {
     private List<Avaliacao> avaliacaoList;
     
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Endereco idEndereco;
 
     public Cliente() {

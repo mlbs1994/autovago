@@ -62,27 +62,27 @@ public class ClienteBean implements Serializable {
     public String salvar() {
 
         try {
-             Cliente cliente = new Cliente();
+            Cliente cliente = new Cliente();
         
-        cliente.setNome(this.nome);
-        cliente.setEmail(this.email);
-        cliente.setLogin(this.login);
-        cliente.setSenha(this.senha);
+            cliente.setNome(this.nome);
+            cliente.setEmail(this.email);
+            cliente.setLogin(this.login);
+            cliente.setSenha(this.senha);
+
+
+            Endereco endereco = new Endereco();
+            endereco.setLogradouro(this.logradouro);
+            endereco.setNumero(this.numero);
+            endereco.setComplemento(this.complemento);
+            endereco.setBairro(this.bairro);
+            endereco.setCidade(this.cidade);
+            endereco.setEstado(this.estado);
+            endereco.setCep(this.cep);
+            endereco.setLatitude(0.0f);
+            endereco.setLongitude(0.0f);
         
-        
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(this.logradouro);
-        endereco.setNumero(this.numero);
-        endereco.setComplemento(this.complemento);
-        endereco.setBairro(this.bairro);
-        endereco.setCidade(this.cidade);
-        endereco.setEstado(this.estado);
-        endereco.setCep(this.cep);
-        endereco.setLatitude(0.0f);
-        endereco.setLongitude(0.0f);
-        
-        cliente.setIdEndereco(endereco);
-        this.getClienteServico().salvar(cliente);
+            cliente.setIdEndereco(endereco);
+            this.getClienteServico().salvar(cliente);
         
         
 

@@ -40,4 +40,15 @@ public class AdmConcessionariaServico {
         return c;
         
     }
+
+    public AdmConcessionaria getAdmConcessionariaPorUsuario(Usuario usuario)
+    {
+       Query q = this.em.createQuery("SELECT a FROM AdmConcessionaria a WHERE a.idUsuario = :idUsuario");
+        
+       q.setParameter("idUsuario", usuario.getIdUsuario());
+        
+       AdmConcessionaria a = (AdmConcessionaria) q.getSingleResult();
+        
+       return a;
+    }
 }
