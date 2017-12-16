@@ -1,5 +1,6 @@
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\ClienteBean.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\OfertaBean.java
+C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\AvaliacaoServico.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\AdmConcessionariaServico.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\CategoriaServico.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\FabricanteServico.java
@@ -24,6 +25,7 @@ C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\modelo\Categoria.
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\AutomovelConverter.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\EnderecoServico.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\servico\OfertaServico.java
+C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\AvaliacaoBean.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\FiltroBean.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\ConcessionariaBean.java
 C:\Users\Matheus Levi\Desktop\Autovago3\autovago\src\main\java\beans\AutomovelBean.java

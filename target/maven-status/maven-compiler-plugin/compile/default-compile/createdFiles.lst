@@ -1,3 +1,4 @@
+servico\AvaliacaoServico.class
 modelo\AdmConcessionaria_.class
 modelo\Oferta.class
 beans\ConcessionariaBean.class
@@ -18,6 +19,7 @@ beans\CategoriaBean.class
 modelo\AdmConcessionaria.class
 modelo\Concessionaria_.class
 beans\ClienteBean.class
+beans\AvaliacaoBean.class
 servico\UsuarioServico.class
 beans\AutomovelConverter.class
 modelo\Categoria_.class
@@ -39,6 +41,7 @@ beans\LogoutBean.class
 modelo\Cliente.class
 modelo\Endereco.class
 beans\CategoriaConverter.class
+beans\FileUploadBean.class
 modelo\Oferta_.class
 modelo\Usuario.class
 modelo\Imagem.class

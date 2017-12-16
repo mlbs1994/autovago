@@ -185,7 +185,7 @@ body
     height: 20px;
 }
 
-#formCadastrarOferta, #formCadastrarAutomovel, #formCadastrarCategoria
+#formCadastrarOferta, #formCadastrarAutomovel, #formCadastrarCategoria, #formCadastrarAvaliacao
 {
     padding-left: 15%;
 }
@@ -206,4 +206,9 @@ body
     #minhasOfertasTable .textoColuna
     {
         font-size: 8pt;
+    }
+    
+    .ui-datalist-data ui-datalist-nobullets
+    {
+       background-color: red;
     }

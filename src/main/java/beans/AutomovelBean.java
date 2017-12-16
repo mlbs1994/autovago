@@ -51,7 +51,9 @@ public class AutomovelBean implements Serializable{
     private List<Categoria> categorias;
     private List<Fabricante> fabricantes;
     private List<Automovel> automoveis;
-    private List<Oferta> ofertasAutomovel;
+    
+    Automovel automovelSelAval;
+ 
     
     public AutomovelBean() {
     }
@@ -179,14 +181,21 @@ public class AutomovelBean implements Serializable{
         this.automoveis = automoveis;
     }
 
-    public List<Oferta> getOfertasAutomovel(Automovel automovel) {
-        ofertasAutomovel = this.ofertaServico.getMelhoresOfertas(automovel);
-        return ofertasAutomovel;
+    public Automovel getAutomovelSelAval() {
+        return automovelSelAval;
     }
 
-    public void setOfertasAutomovel(List<Oferta> ofertasAutomovel) {
-        this.ofertasAutomovel = ofertasAutomovel;
+    public void setAutomovelSelAval(Automovel automovelSelAval) {
+        this.automovelSelAval = automovelSelAval;
     }
+    
+    public String atualizarCarroSelAval(Integer id)
+    {
+        automovelSelAval = this.automovelServico.getAutomovel(id);
+        
+        return "fazerAvaliacao.xhtml?faces-redirect=true";
+    }
+    
 
     public String salvar() {
 
@@ -217,6 +226,11 @@ public class AutomovelBean implements Serializable{
         }
         
         return "cadastrarAutomovel.xhtml?faces-redirect=true";
+    }
+    
+    public Automovel getAutomovelPorId(Integer id)
+    {
+        return this.automovelServico.getAutomovel(id);
     }
     
     

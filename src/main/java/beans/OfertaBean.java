@@ -50,6 +50,7 @@ public class OfertaBean {
     List<Oferta> minhasOfertas;
     List<Oferta> melhoresOfertas;
     List<Automovel> listaAutomoveis;
+    List<List<Oferta>> listaOfertasPorAutomovel;
     
     
     public OfertaBean() {
@@ -203,6 +204,17 @@ public class OfertaBean {
     public void setAutomovelServico(AutomovelServico automovelServico) {
         this.automovelServico = automovelServico;
     }
+
+    public List<List<Oferta>> getListaOfertasPorAutomovel() {
+        listaOfertasPorAutomovel = this.ofertaServico.getListaOfertasPorAutomovel(this.getListaAutomoveis());
+        return listaOfertasPorAutomovel;
+    }
+
+    public void setListaOfertasPorAutomovel(List<List<Oferta>> listaOfertasPorAutomovel) {
+        this.listaOfertasPorAutomovel = listaOfertasPorAutomovel;
+    }
+    
+    
 
     
     public String salvar()

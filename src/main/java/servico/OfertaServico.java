@@ -5,6 +5,7 @@
  */
 package servico;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -69,6 +70,46 @@ public class OfertaServico
         return listaMelhoresOfertas;
         
     }
+
+    public List<List<Oferta>> getListaOfertasPorAutomovel(List<Automovel> listaAutomoveis)
+    {
+        Query q = this.em.createQuery("SELECT o FROM Oferta o ORDER BY o.idAutomovel ASC");
+        
+        List<Oferta> listaOfertas = q.getResultList();
+        
+        List<List<Oferta>> listaOfertasPorAutomovel = new ArrayList();
+        
+        int contOferta=0;
+        
+        for(int i=0;i<listaAutomoveis.size();i++)
+        {
+            
+           List<Oferta> listaOfertaAutomovel = new ArrayList(); 
+           boolean terminou = false;
+           
+           while(terminou==false)
+           {
+               
+               if(listaOfertas.get(contOferta).getIdAutomovel().getIdAutomovel().
+                       equals(listaAutomoveis.get(i).getIdAutomovel()))
+                       
+               {
+                   listaOfertaAutomovel.add(listaOfertas.get(contOferta));
+                   contOferta++;
+               }
+               else
+               {
+                   terminou=true;
+               }
+           }
+           
+           listaOfertasPorAutomovel.add(listaOfertaAutomovel);
+        }
+        
+        return listaOfertasPorAutomovel;
+    }
+
+    
 
     
     
