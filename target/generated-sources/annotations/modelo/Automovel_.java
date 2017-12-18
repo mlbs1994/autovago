@@ -10,7 +10,7 @@ import modelo.Fabricante;
 import modelo.Imagem;
 import modelo.Oferta;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-12-17T18:35:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-12-18T19:05:34")
 @StaticMetamodel(Automovel.class)
 public class Automovel_ { 
 

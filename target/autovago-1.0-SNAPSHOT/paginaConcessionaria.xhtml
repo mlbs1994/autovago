@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./modeloAlterarCadastro.xhtml">
+
+            <ui:define name="top">
+                <h:panelGrid style="padding: 5px; margin: auto;">
+                    <p:outputLabel value="#{automovelBean.ofertaSel.idConcessionaria.nome}" style="color: black; font-size: 30pt; font-weight: bold;" />
+                </h:panelGrid>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage library="imgs" name="#{automovelBean.ofertaSel.idAutomovel.imgSrc}" style="display: block; margin-left: auto;  margin-right: auto;
+                                    margin-top: 0px; height: 350px; width: 500px;"    />
+                    <p:outputPanel>
+
+                        <h:panelGrid columns="2" cellpadding="3">
+                            <h:outputText value="Modelo" />
+                            <h:outputText value="#{automovelBean.ofertaSel.idAutomovel.idFabricante.nome} #{automovelBean.ofertaSel.idAutomovel.nomeModelo} #{automovelBean.ofertaSel.idAutomovel.ano}" style="font-weight: bold"/>
+
+                            <h:outputText value="Cor" />
+                            <h:outputText value="#{automovelBean.ofertaSel.cor}" style="font-weight: bold"/>
+
+                            <h:outputText value="Descrição  " />
+                            <h:outputText value="#{automovelBean.ofertaSel.descricao}" style="font-weight: bold"/>
+
+                            <h:outputText value="Preço" />
+                            <h:outputText value="#{automovelBean.ofertaSel.preco}" style="font-weight: bold"/>
+
+                            <h:outputText value="ZeroKm: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.ehZeroKm}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Automatico: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.ehAutomatico}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="4 Portas: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.eh4Portas}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Direção Hidraulica: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.ehDirecaoHidraulica}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Computador de Bordo: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.temComputadorBordo}" style="font-weight: bold"/>
+                            
+                            <h:outputText value="Sistema Antiroubo: " />
+                            <h:outputText value="#{automovelBean.ofertaSel.temSistemaAntiRoubo}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                    
+                    <h:panelGrid columns="1" style="margin: auto;">
+                        <h:form>
+                            <h:commandLink action="home.xhtml?faces-redirect=true" value="Voltar" style="font-size: 30pt;"  />
+                        </h:form>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

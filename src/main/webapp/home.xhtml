@@ -5,7 +5,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    <h:head>
+        
+    </h:head>
 
     <ui:composition template="./modeloPrincipal.xhtml">
 
@@ -24,22 +26,25 @@
                         </h:commandLink>
                     </h:panelGrid>    
                 </h:form>
-                
+
                 <!--<h:link id="logoutLink" style="font-size:  10pt !important;
                                              padding-top: 40px !important; padding-left: 300px !important;
                                              color: darkblue !important;"  outcome="login.xhtml">Logout</h:link>-->
             </div> 
         </ui:define>
-        
+
         <ui:define name="left">
             <h:form>
                 <h:panelGrid id="panelSearchOferta" columns="1" cellpadding="5" 
                              style="width: 250px; text-align: center; font-family: Helvetica; font-size: 12pt; font-weight: bold;">    
                     <h:outputText id="labelSearchOferta" value="Buscar Ofertas"/>
-                    <p:inputText id="buscarCarro" placeholder="Digite sua busca"
-                             style="font-size: 8pt; width: 208.2px; border-radius: 10px; "/>
+                    <p:inputText id="buscarCarro" placeholder="Digite sua busca" value="#{automovelBean.filtro.palavraChave}"
+                                 style="font-size: 8pt; width: 208.2px; border-radius: 10px; ">
+                    </p:inputText>
                     <p:commandButton value="Buscar" 
-                             style="font-size: 8pt; width: 166.6px; border-radius: 5px;" />
+                                     style="font-size: 8pt; width: 166.6px; border-radius: 5px;" >
+                        <p:ajax event="click" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                    </p:commandButton>
                 </h:panelGrid>
             </h:form>
 
@@ -48,150 +53,222 @@
             <h:panelGrid columns="1" style="text-align: center; font-family: Helvetica;">
                 <h:outputText id="labelSearchOfertaAvancado" value="Filtro" 
                               style="font-size: 12pt; font-weight: bold;"/>
-                <h:panelGrid id="panelSearchOfertaAvancado" columns="2" cellpadding="5"
+                <h:panelGrid id="panelSearchOfertaAvancado" columns="1" cellpadding="5"
                              style="margin-bottom:10px;" >
-                    <p:outputLabel for="categoriaFiltro" value="Categoria"  
-                                   style="font-size: 8pt; font-weight: bold;"/>
-                    <p:selectOneMenu id="categoriaFiltro" value="#{filtroBean.categoria}" 
-                                   style="width:120px; font-size: 8pt;">
-                        <f:selectItem itemLabel="Selecione" itemValue="0" />
-                        <f:selectItems var="categoria" itemValue="#{categoria.idCategoria}" itemLabel="#{categoria.nome}" value="#{filtroBean.categorias}"/>
-                    </p:selectOneMenu>
+                    <h:form id="formFiltro1_1">
+                        <h:panelGrid columns="2">
+                        <p:outputLabel for="categoriaFiltro" value="Categoria"  
+                                       style="font-size: 8pt; font-weight: bold;  "/>
+                        <p:selectOneMenu id="categoriaFiltro" value="#{automovelBean.filtro.categoriaFiltro}" 
+                                         style="width:133px; font-size: 8pt; margin-left: 10px;">
+                            <f:selectItem itemLabel="Selecione" itemValue="#{categoria}" />
+                            <f:selectItems var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.nome}" value="#{automovelBean.categorias}"/>
+                            <f:converter converterId="categoriaConverter" />
+                            <p:ajax event="change" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                        </p:selectOneMenu>
+                        </h:panelGrid>
+                    </h:form> 
+                    <h:form id="formFiltro1_2">
+                        <h:panelGrid columns="2">
+                        <p:outputLabel for="FabricanteFiltro" value="Fabricante" 
+                                       style="font-size: 8pt; font-weight: bold;"/>
+                        <p:selectOneMenu id="FabricanteFiltro" value="#{automovelBean.filtro.fabricanteFiltro}" 
+                                         style="width:133px; font-size: 8pt; margin-left: 6px;">
+                            <f:selectItem itemLabel="Selecione" itemValue="#{fab}" />
+                            <f:selectItems value="#{automovelBean.fabricantes}" var="fab" 
+                                           itemValue="#{fab}" itemLabel="#{fab.nome}" />
+                            <f:converter converterId="fabricanteConverter" />
+                            <p:ajax event="change" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                        </p:selectOneMenu>
+                        </h:panelGrid>
+                    </h:form>        
 
-                    <h:outputText value="Modelo"
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <p:inputText id="modelo" 
-                                  style="width:133px; font-size: 8pt;"/>                
-
-                    <p:outputLabel for="FabricanteFiltro" value="Fabricante:" 
-                                   style="font-size: 8pt; font-weight: bold;"/>
-                    <p:selectOneMenu id="FabricanteFiltro" value="#{filtroBean.fabricante}" 
-                                   style="width:120px; font-size: 8pt;">
-                        <f:selectItem itemLabel="Selecione" itemValue="0" />
-                        <f:selectItems var="fabricante" itemValue="#{fabricante.idFabricante}" itemLabel="#{fabricante.nome}" value="#{filtroBean.fabricantes}"/>
-                    </p:selectOneMenu>
-
-                    <h:outputText value="Ano"
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <p:inputText id="ano" 
-                                  style="width:133px; font-size: 8pt;"/> 
+                    <h:form id="formFiltro1_3">    
+                        <h:panelGrid columns="2">
+                        <h:outputText value="Ano"
+                                      style="font-size: 8pt; font-weight: bold;"/>
+                        <p:inputText id="ano"  value="#{automovelBean.filtro.anoFiltro}"
+                                     style="width:133px; font-size: 8pt; margin-left: 40px;">
+                            <p:ajax event="change" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                        </p:inputText> 
+                        </h:panelGrid>
+                    </h:form>
 
                 </h:panelGrid>
-            
+               
+
                 <h:panelGrid columns="1" cellpadding="2" style="text-align: center; padding-left: 8px; ">
-                    <h:outputLabel   value="Preço" 
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                        <p:inputNumber id="precoMax" placeholder="Min"  size="9" />  
-                        <p:inputNumber id="precoMin" placeholder="Max"  size="9" />  
-                    </h:panelGrid>
-                    <h:outputLabel   value="Estrelas" 
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <p:rating value="1" style="width: 200px;" />
-                    <h:outputLabel   value="Avaliação dos usuários" 
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <p:panelGrid columns="5">
-                        <span class="rating" style="height: 70px; width: 70px; background-color: red;
-                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
-                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
-                            0+
-                        </span>
-                        <span class="rating" style="height: 70px; width: 70px; background-color: greenyellow;
-                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
-                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
-                            70+
-                        </span>
-                        <span class="rating" style="height: 70px; width: 70px; background-color: #0b0;
-                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
-                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
-                            75+
-                        </span>
-                        <span class="rating" style="height: 70px; width: 70px; background-color: #0a0;
-                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
-                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
-                            80+
-                        </span>
-                        <span class="rating" style="height: 70px; width: 70px; background-color: green;
-                                   color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
-                                   margin-left: 8px; font-size: 8pt; font-weight: bold;">
-                            85+
-                        </span>
-                    </p:panelGrid>
-                    <h:outputLabel   value="Especificações" 
-                                  style="font-size: 8pt; font-weight: bold;"/>
-                    <p:panelGrid columns="3" style="margin-left: 30px;">
-                        <p:graphicImage library="imgs" name="icon1.png" alt='0 Km' title="0 Km"
-                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
-                        <p:graphicImage library="imgs" name="icon2.png" alt='Câmbio Automático' title="Câmbio Automático"
-                                        style='width: 35px; height: 35px; border-radius: 3px;' />
-                        <p:graphicImage library="imgs" name="icon3.png" alt='4 Portas' title="4 Portas"
-                                        style='width: 35px; height: 35px; border-radius: 3px;' />
-                        <p:graphicImage library="imgs" name="icon4.png" alt='Direção Hidraúlica' title="Direção Hidraúlica"
-                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
-                        <p:graphicImage library="imgs" name="icon5.png" alt='Computador de bordo' title="Computador de bordo"
-                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
-                        <p:graphicImage library="imgs" name="icon6.png" alt='Antiroubo' title="Antiroubo"
-                                        style='width: 35px; height: 35px; border-radius: 3px;'/>
-                    </p:panelGrid>
+                    <h:form id="formFiltro2">
+                        <h:outputLabel   value="Preço" 
+                                         style="font-size: 8pt; font-weight: bold;"/>
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <p:inputNumber required='true' id="precoMax" placeholder="Min"  size="9" value="#{automovelBean.filtro.precoMinFiltro}">
+                                <p:ajax event="change" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                            </p:inputNumber>    
+                            <p:inputNumber required='true' id="precoMin" placeholder="Max"  size="9" value="#{automovelBean.filtro.precoMaxFiltro}">  
+                                <p:ajax event="change" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                            </p:inputNumber>    
+                        </h:panelGrid>
+                    </h:form>
+                    <h:form id="formFiltro3">
+                        <h:outputLabel   value="Estrelas" 
+                                         style="font-size: 8pt; font-weight: bold;"/>
+                        <p:rating value="#{automovelBean.filtro.numEstrelasFiltro}" style="width: 230px;">
+                            <p:ajax event="rate" process="@all" update="@all" listener="#{automovelBean.filtrarListaOfertas(0,'')}" />
+                        </p:rating>    
+                    </h:form>
+                    <h:form id="formFiltro4">
+                        <h:outputLabel   value="Avaliação dos usuários" 
+                                         style="font-size: 8pt; font-weight: bold;"/>
+                        <p:panelGrid columns="5">  
+                            <h:commandLink>
+                                <span class="rating" style="height: 70px; width: 70px; background-color: #{automovelBean.zeroPCor};
+                                      color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                      margin-left: 4px; font-size: 8pt; font-weight: bold;">
+                                    0+
+                                </span>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(0, '0+')}" update="@all"  />
+                            </h:commandLink> 
+                            <h:commandLink>
+                                <span class="rating" style="height: 70px; width: 70px; background-color: #{automovelBean.setentaPCor};
+                                      color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                      margin-left: 4px; font-size: 8pt; font-weight: bold;">
+                                    70+
+                                </span>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(0, '70+')}" update="@all"  />
+                            </h:commandLink>  
+                            <h:commandLink>
+                                <span class="rating" style="height: 70px; width: 70px; background-color: #{automovelBean.setentaCincoPCor};
+                                      color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                      margin-left: 4px; font-size: 8pt; font-weight: bold;">
+                                    75+
+                                </span>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(0, '75+')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <span class="rating" style="height: 70px; width: 70px; background-color: #{automovelBean.oitentaPCor};
+                                      color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                      margin-left: 4px; font-size: 8pt; font-weight: bold;">
+                                    80+
+                                </span>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(0, '80+')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <span class="rating" style="height: 70px; width: 70px; background-color: #{automovelBean.oitentaCincoPCor};
+                                      color: white; margin-top: 20px; padding: 6px; border-radius: 5px; border-color: white;
+                                      margin-left: 4px; font-size: 8pt; font-weight: bold;">
+                                    85+
+                                </span>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(0, '85+')}" update="@all"  />
+                            </h:commandLink>    
+                        </p:panelGrid>
+                    </h:form>
+                    <h:form id="formFiltro5">
+                        <h:outputLabel   value="Especificações" 
+                                         style="font-size: 8pt; font-weight: bold;"/>
+                        <p:panelGrid columns="3" style="margin-left: 30px;">
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.zeroKmImg}" alt='0 Km' title="0 Km"
+                                                style='width: 35px; height: 35px; border-radius: 3px;'/>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(1, '')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.cambioAutomaticoImg}" alt='Câmbio Automático' title="Câmbio Automático"
+                                                style='width: 35px; height: 35px; border-radius: 3px;' />
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(2, '')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.eh4PortasImg}" alt='4 Portas' title="4 Portas"
+                                                style='width: 35px; height: 35px; border-radius: 3px;' />
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(3, '')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.ehDirecaoHidraulicaImg}" alt='Direção Hidraúlica' title="Direção Hidraúlica"
+                                                style='width: 35px; height: 35px; border-radius: 3px;'/>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(4, '')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.temComputadorBordoImg}" alt='Computador de bordo' title="Computador de bordo"
+                                                style='width: 35px; height: 35px; border-radius: 3px;'/>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(5, '')}" update="@all"  />
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage library="imgs" name="#{automovelBean.temSistemaAntirouboImg}" alt='Antiroubo' title="Antiroubo"
+                                                style='width: 35px; height: 35px; border-radius: 3px;'/>
+                                <p:ajax event="click" process="@all" listener="#{automovelBean.filtrarListaOfertas(6, '')}" update="@all"  />
+                            </h:commandLink>
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <p:commandButton value="Resetar Filtro" 
+                                             style="font-size: 8pt; width: 206.6px; border-radius: 5px;" >
+                                <p:ajax event="click" process="@all" update="@all" listener="#{automovelBean.resetarFiltro()}" />
+                            </p:commandButton>
+                        </p:panelGrid>
+                    </h:form>
                 </h:panelGrid>
-                </h:panelGrid>
-                
-           
+
+            </h:panelGrid>
+
+
         </ui:define>
-        
+
         <ui:define name="content">
             <h:outputLabel id="ofertasLabel" style="font-family: Helvetica;">OFERTAS</h:outputLabel>
-            
+
             <div class="ui-g" id="ofertasLista">
-                <ui:repeat value="#{automovelBean.automoveis}" var="automovel">
-                <div class="ui-g-6 listaCell">
-                    <h:panelGrid columns="2" style="border: none;">
-                         <h:graphicImage class="imgCarro" style="width:255px; height: 180px; margin: 0px; padding: 0px;" 
-                                         library="imgs" name="#{automovel.imgSrc}" /> 
-                         <h:panelGrid id="descrCarro" style="font-size: 13pt; padding-left: 10px;
-                                      font-weight: bold;">
-                             <h:outputLabel class="modeloCarro">#{automovel.idFabricante.nome} #{automovel.nomeModelo} #{automovel.ano}</h:outputLabel>
-                             <h:graphicImage class="starRating" style="width:140px; height: 20px; margin: 0px; padding: 0px;" 
-                                             library="imgs" name="star-rating-#{automovel.numEstrelas}.jpg" />  
-                             <p:outputPanel style=" margin-top: 25px; margin-bottom: 25px; font-size: 9pt; font-weight: normal;">
-                                 #{automovel.descricao}
-                             </p:outputPanel>
-                             <span class="rating" style="height: 50px; width: 50px; background-color: #{avaliacaoBean.getCorAvaliacao(avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel))};
-                                   color: white; margin-top: 20px; padding: 5px; border-radius: 5px;">#{avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel)}</span>
-                             <span class="rating2" style="font-size: 9pt;"> #{avaliacaoBean.getNominalNota(avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel), automovel)}</span>
-                             <span class="rating2" style="font-size: 9pt;"> <h:form><h:commandLink action="#{automovelBean.atualizarCarroSelAval(automovel.idAutomovel)}" style="color: green; font-size: 10pt;">Avaliar este carro</h:commandLink></h:form></span>
-                         </h:panelGrid>
-                    </h:panelGrid>
-                </div>
-                <div class="ui-g-2 listaCell">
-                    <ui:repeat value="#{automovel.ofertaList}" var="oferta" size="3">
-                        <p:column >
-                        <div class="nomeConcessionaria" 
-                             style="font-size: 12pt; text-align: center; padding: 5px; font-weight: bold;"> 
-                            #{oferta.idConcessionaria.nome}
+                    <ui:repeat value="#{automovelBean.automoveis}" var="automovel" id="listaCarros">
+                        <div class="ui-g-6 listaCell" style="height: 240px;">
+                            <h:panelGrid columns="2" style="border: none;">
+                                <h:graphicImage class="imgCarro" style="width:255px; height: 180px; margin: 0px; padding: 0px;" 
+                                                library="imgs" name="#{automovel.imgSrc}" /> 
+                                <h:panelGrid id="descrCarro" style="font-size: 13pt; padding-left: 10px;
+                                             font-weight: bold;">
+                                    <h:outputLabel class="modeloCarro">#{automovel.idFabricante.nome} #{automovel.nomeModelo} #{automovel.ano}</h:outputLabel>
+                                    <h:graphicImage class="starRating" style="width:140px; height: 20px; margin: 0px; padding: 0px;" 
+                                                    library="imgs" name="star-rating-#{automovel.numEstrelas}.jpg" />  
+                                    <p:outputPanel style=" margin-top: 25px; margin-bottom: 25px; font-size: 9pt; font-weight: normal;">
+                                        #{automovel.descricao}
+                                    </p:outputPanel>
+                                    <span class="rating" style="height: 50px; width: 50px; background-color: #{avaliacaoBean.getCorAvaliacao(avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel))};
+                                          color: white; margin-top: 20px; padding: 5px; border-radius: 5px;">#{avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel)}</span>
+                                    <span class="rating2" style="font-size: 9pt;"> #{avaliacaoBean.getNominalNota(avaliacaoBean.calcularMediaAvaliacaoAutomovel(automovel), automovel)}</span>
+                                    <span class="rating2" style="font-size: 9pt;">
+                                        <h:form>
+                                            <p:commandLink id="linkAvaliacao" value="Avaliar carro" action="#{automovelBean.atualizarCarroSelAval(automovel.idAutomovel)}" style="color: green; font-size: 10pt;" />
+                                        </h:form>
+                                    </span>
+                                </h:panelGrid>
+                            </h:panelGrid>
                         </div>
-                        <div class="ofertaCarroConcessionaria" 
-                            style="font-size: 9pt; text-align: center;padding: 5px; margin-bottom: 10px;">
-                            <h:outputText value="#{oferta.preco}">
+                        <div class="ui-g-2 listaCell" style="height: 240px;">
+                            <ui:repeat id="ofertaAutomovelList" value="#{automovelBean.getOfertasAutomovel(automovel)}" var="oferta" size="3">
+                                <p:column >
+                                    <div class="nomeConcessionaria" 
+                                         style="font-size: 11pt; text-align: center; padding: 3px; font-weight: bold;"> 
+                                        #{oferta.idConcessionaria.nome}
+                                    </div>
+                                    <div class="ofertaCarroConcessionaria" 
+                                         style="font-size: 9pt; text-align: center;padding: 3px; margin-bottom: 10px;">
+                                        <h:outputText value="#{oferta.preco}">
+                                            <f:convertNumber type="currency" currencySymbol="R$" />
+                                        </h:outputText>
+                                    </div>
+                                </p:column>    
+                            </ui:repeat>
+                        </div>
+                        <div class="ui-g-3 listaCell" style="height: 240px;">
+                            <div class="nomeConcessionariaMelhorOferta" 
+                                 style="font-size: 20pt; text-align: center; padding: 5px; padding-top: 50px; font-weight: bold;">#{automovelBean.getMelhorOferta(automovel).idConcessionaria.nome}</div>
+                            <div class="ofertaCarroConcessionaria" 
+                                 style="font-size: 15pt; text-align: center;padding: 5px; margin-bottom: 15px; color: #0a0; font-weight: bold;">
+                                <h:outputText value="#{automovelBean.getMelhorOferta(automovel).preco}">
                                     <f:convertNumber type="currency" currencySymbol="R$" />
-                            </h:outputText>
+                                </h:outputText>
+                            </div>
+                            <p:commandButton  value="Ver Oferta" action="#{automovelBean.redirect(automovelBean.getMelhorOferta(automovel))}" id="btn_verOferta" 
+                                             style=" width: 100px; height: 30px; background-color: #0a0; color:#fff; display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>   
                         </div>
-                        </p:column>    
-                    </ui:repeat>
-                </div>
-                <div class="ui-g-3 listaCell">
-                     <div class="nomeConcessionariaMelhorOferta" 
-                          style="font-size: 20pt; text-align: center; padding: 5px; padding-top: 50px; font-weight: bold;">#{automovel.ofertaList.get(0).idConcessionaria.nome}</div>
-                     <div class="ofertaCarroConcessionaria" 
-                         style="font-size: 15pt; text-align: center;padding: 5px; margin-bottom: 15px; color: #0a0; font-weight: bold;">
-                        <h:outputText value="#{automovel.ofertaList.get(0).preco}">
-                                <f:convertNumber type="currency" currencySymbol="R$" />
-                        </h:outputText>
-                     </div>
-                     <p:commandButton value="Ver Oferta" action="login.xhtml" id="btn_verOferta" 
-                                      style=" width: 100px; height: 30px; background-color: #0a0; color:#fff; display: block; margin: auto; margin-top: 40px;"/>   
-                </div>
-                </ui:repeat>
+                    </ui:repeat> 
             </div>
         </ui:define>
     </ui:composition>

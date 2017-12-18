@@ -59,6 +59,8 @@ public class AvaliacaoServico
         
         return media;
     }
+    
+    
 
     public Long getCountAvaliacoesAutomovel(Automovel automovel) {
        

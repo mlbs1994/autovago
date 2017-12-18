@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import modelo.Automovel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-12-17T18:35:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-12-18T19:05:34")
 @StaticMetamodel(Fabricante.class)
 public class Fabricante_ { 
 

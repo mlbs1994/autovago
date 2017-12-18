@@ -109,6 +109,20 @@ public class OfertaServico
         return listaOfertasPorAutomovel;
     }
 
+    public Oferta getMelhorOfertaAutomovel(Automovel automovel) {
+        
+        Query q = em.createQuery("SELECT o FROM Oferta o WHERE o.idAutomovel = :idAutomovel ORDER BY o.preco ASC");
+        
+        q.setParameter("idAutomovel", automovel);
+        
+        List<Oferta> ofertas = q.getResultList();
+        
+        Oferta melhorOferta = ofertas.get(0);
+        
+        return melhorOferta;
+        
+    }
+
     
 
     
