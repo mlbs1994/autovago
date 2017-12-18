@@ -6,19 +6,31 @@
 package modelo;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -70,8 +82,17 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "senha")
     private String senha;
+   
     
+    @Column(name = "txt_sal")
+    private String sal;
     
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuario_grupo", joinColumns = {
+        @JoinColumn(name = "idUsuario")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "idGrupo")})
+    private List<Grupo> grupos;
 
     public Usuario() {
     }
@@ -86,6 +107,27 @@ public class Usuario implements Serializable {
         this.email = email;
         this.login = login;
         this.senha = senha;
+    }
+    
+    
+    @PrePersist
+    public void gerarHash() {
+        try {
+            gerarSal();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            setSenha(sal + senha);
+            digest.update(senha.getBytes(Charset.forName("UTF-8")));
+            setSenha(Base64.getEncoder().encodeToString(digest.digest()));
+        } catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void gerarSal() throws NoSuchAlgorithmException {
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        byte[] randomBytes = new byte[32];
+        secureRandom.nextBytes(randomBytes);
+        setSal(Base64.getEncoder().encodeToString(randomBytes));
     }
 
     public Integer getIdUsuario() {
@@ -159,6 +201,44 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    /**
+     * @return the sal
+     */
+    public String getSal() {
+        return sal;
+    }
+
+    /**
+     * @param sal the sal to set
+     */
+    public void setSal(String sal) {
+        this.sal = sal;
+    }
+
+    /**
+     * @return the grupos
+     */
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    /**
+     * @param grupos the grupos to set
+     */
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+    
+    public void adicionarGrupo(Grupo grupo) {
+        if (this.grupos == null) {
+            this.grupos = new ArrayList<>();
+        }
+        
+        this.grupos.add(grupo);
+        
+        
     }
     
 }

@@ -6,6 +6,10 @@
 package beans;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -61,14 +65,17 @@ public class LoginBean implements Serializable {
     }
 
     public String efetuarLogin() {
-        Usuario usuario = UsuarioServico.buscarPessoa(username, senha);
-        String homepage="";
-        if (usuario == null) {
-            return "/login";
+        
+        try {
+            Usuario usuario = UsuarioServico.buscarPessoa(username, senha);
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            setSenha(usuario.getSal() + senha);
+            digest.update(senha.getBytes(Charset.forName("UTF-8")));
+            setSenha(Base64.getEncoder().encodeToString(digest.digest()));
             
-
-        } else {
-            this.usuarioLogado = usuario;
+            String homepage="";
+            if(senha.equals(usuario.getSenha())){
+                this.usuarioLogado = usuario;
             
             if(this.usuarioLogado.getDecriminatorValue().equals("C"))
             {
@@ -81,13 +88,17 @@ public class LoginBean implements Serializable {
                  homepage =  "/cadastrarOferta.xhtml?faces-redirect=true";
                  admConcessionariaLogado = this.AdmConcessionariaServico.getAdmConcessionariaPorUsuario(usuario);
             }
+               
+            System.out.println("homepage = "+homepage);
+            return homepage;
             
+            } else{
+                 return "/login";
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException(ex);
         }
-       
-        System.out.println("homepage = "+homepage);
-        return homepage;
-
-    }
+   }
     
     public String alterarDadosCadastrais() throws ServletException
     {

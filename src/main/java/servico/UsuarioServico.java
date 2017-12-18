@@ -32,9 +32,8 @@ public class UsuarioServico {
 
     public Usuario buscarPessoa(String login, String senha) {
         Usuario usuario = null;
-        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha");
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login");
         q.setParameter("login", login);
-        q.setParameter("senha", senha);
         List<Usuario> usr = q.getResultList();
 
         if (!(usr.isEmpty())) {

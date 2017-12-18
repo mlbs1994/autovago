@@ -1,6 +1,7 @@
 
 package servico;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import modelo.AdmConcessionaria;
 import modelo.Concessionaria;
+import static modelo.Grupo.ADMCONCESSIONARIA;
 import modelo.Usuario;
 
 /**
@@ -16,13 +18,18 @@ import modelo.Usuario;
  */
 @Stateless
 public class AdmConcessionariaServico {
-@PersistenceContext(unitName = "autovago", type = PersistenceContextType.TRANSACTION)
+    
+    @EJB
+    private GrupoServico grupoServico;
+    
+    @PersistenceContext(unitName = "autovago", type = PersistenceContextType.TRANSACTION)
     protected EntityManager em;
     
     public AdmConcessionariaServico() {
     }
 
     public void salvar(AdmConcessionaria admConcessionaria) {
+        admConcessionaria.adicionarGrupo(grupoServico.getGrupo(ADMCONCESSIONARIA));
         em.persist(admConcessionaria);
     }
     

@@ -5,6 +5,7 @@
  */
 package servico;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import static javax.ejb.TransactionManagementType.CONTAINER;
@@ -13,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import modelo.Cliente;
+import static modelo.Grupo.USUARIO;
 import modelo.Usuario;
 
 /**
@@ -23,6 +25,9 @@ import modelo.Usuario;
 @TransactionManagement(CONTAINER)
 public class ClienteServico {
 
+    @EJB
+    private GrupoServico grupoServico;
+    
     @PersistenceContext(unitName = "autovago", type = PersistenceContextType.TRANSACTION)
     protected EntityManager em;
     
@@ -30,6 +35,8 @@ public class ClienteServico {
     }
 
     public void salvar(Cliente cliente) {
+        
+        cliente.adicionarGrupo(grupoServico.getGrupo(USUARIO));
         em.persist(cliente);
     }
     
