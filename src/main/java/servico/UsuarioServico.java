@@ -30,7 +30,7 @@ public class UsuarioServico {
     }
 
 
-    public Usuario buscarPessoa(String login, String senha) {
+     public Usuario buscarPessoa(String login) {
         Usuario usuario = null;
         Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.login = :login");
         q.setParameter("login", login);

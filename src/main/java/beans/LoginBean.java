@@ -61,33 +61,37 @@ public class LoginBean implements Serializable {
     }
 
     public String efetuarLogin() {
-        Usuario usuario = UsuarioServico.buscarPessoa(username, senha);
-        String homepage="";
-        if (usuario == null) {
-            return "/login";
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        
+        try {
             
-
-        } else {
+            request.login(username, senha);
+            facesContext.getExternalContext().getSession(true);
+            
+            Usuario usuario = UsuarioServico.buscarPessoa(username);
             this.usuarioLogado = usuario;
             
-            if(this.usuarioLogado.getDecriminatorValue().equals("C"))
-            {
-                homepage =  "/home.xhtml?faces-redirect=true";
+            String homepage="";
+            
+            if(this.usuarioLogado.getDecriminatorValue().equals("C")) {
+                homepage =  "/faces/home.xhtml";
                 clienteLogado = this.ClienteServico.getClientePorUsuario(usuario);
                 
-            }
-            if(this.usuarioLogado.getDecriminatorValue().equals("A"))
-            {
-                 homepage =  "/cadastrarOferta.xhtml?faces-redirect=true";
+            } if(this.usuarioLogado.getDecriminatorValue().equals("A")) {
+                 homepage =  "/faces/cadastrarOferta.xhtml";
                  admConcessionariaLogado = this.AdmConcessionariaServico.getAdmConcessionariaPorUsuario(usuario);
             }
+               
+            System.out.println("homepage = "+homepage);
+            return homepage;
             
+            
+        } catch (ServletException ex) {
+           setUsername(null);
+           return "/login";
         }
-       
-        System.out.println("homepage = "+homepage);
-        return homepage;
-
-    }
+   }
     
     public String alterarDadosCadastrais() throws ServletException
     {
